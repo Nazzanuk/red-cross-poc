@@ -1,1 +1,0 @@
-web: ls && cd server && node server.js
