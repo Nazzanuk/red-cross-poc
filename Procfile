@@ -1,1 +1,1 @@
-web: cd release/server && node server.js
+web: cd server/server && node server.js

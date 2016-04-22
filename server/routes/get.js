@@ -6,7 +6,8 @@ var phantom = require('phantom');
 
 module.exports = {
     print(req, res) {
-        var url = 'http://localhost:4055';
+        var url = req.headers.referer;
+        console.log('url', url)
 
         if (req.query.formData) url = url + '#/?formData=' + req.query.formData;
 
