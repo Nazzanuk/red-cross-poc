@@ -1,0 +1,258 @@
+$body: #212121;
+$primary: #ED1B2E;
+$secondary: #454545;
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 990px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 991px) {
+    @content;
+  }
+}
+
+html, body {
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow-x: hidden;
+  background: rgb(244, 244, 244);
+
+  background: radial-gradient(ellipse at center, #fff 70%, #ffe8e8 100%);
+
+  @media print {
+    background: white;
+  }
+
+  height: 100vh;
+}
+
+.app {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+  bottom: 50px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  overflow-y: auto;
+
+  @include mobile {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  @media print {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: static;
+  }
+
+}
+
+input, textarea {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+  min-width: 320px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.fa {
+  line-height: inherit;
+}
+
+[screen] {
+  opacity: 0;
+  padding-top: 50px;
+  transition: .3s;
+
+  @media print {
+    padding-top: 0;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+a {
+  color: $primary;
+  &, &:hover, &:visited, &:active {
+    text-decoration: none;
+    //color: inherit;
+  }
+}
+
+.butn {
+  //vertical-align: bottom;
+  position: relative;
+  background: darken($primary, 10%);
+  color: white;
+  line-height: 40px;
+  height: 43px;
+  display: inline-block;
+  text-align: center;
+  padding: 0 20px;
+  min-width: 150px;
+  font-weight: 700;
+  border-radius: 3px;
+  border-bottom: 2px solid darken($primary, 30%);
+  top: 0;
+  text-decoration: none;
+  //transition: .2s;
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+    top: 2px;
+    border-bottom-width: 0px;
+  }
+
+}
+
+.flex-table {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  flex-wrap: wrap;
+  padding: 0px 0 1px;
+  //overflow: hidden;
+  //border-radius: 3px;
+  //box-shadow: 0 0 5px rgba(0,0,0,0.15);
+
+  .flex-row {
+    display: flex;
+    flex: 1 0 100%;
+    border-top: 1px solid #ddd;
+    flex-wrap: wrap;
+
+    &:first-child {
+      border: none;
+    }
+
+    &:last-child {
+      margin-bottom: -1px;
+    }
+
+    .flex-header {
+      background: #333;
+      color: white;
+      text-transform: uppercase;
+      margin-left: -2px;
+      margin-right: -1px;
+      font-weight: 600;
+      margin-top: 50px;
+      font-size: 20px;
+
+      &:before {
+        border-top: 1px solid #ddd;
+        content: "";
+        background: #fff;
+        height: 20px;
+        //margin: 0px -1px 0;
+        position: absolute;
+        height: 52px;
+        left: 0;
+        right: 0;
+        top: -52px;
+
+      }
+    }
+
+    .flex-content {
+      padding: 10px 20px;
+    }
+
+    > div, .flex-field > div {
+      min-height: 50px;
+      display: flex;
+      flex: 2 0 200px;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid #ddd;
+      border-top: 1px solid #ddd !important;
+      margin-top: -1px;
+      margin-left: -1px;
+      text-align: center;
+      position: relative;
+
+      &:first-child {
+        //border: none;
+      }
+    }
+
+    .flex-field {
+      display: flex;
+      flex-wrap: nowrap;
+      flex: 1 0 200px;
+      //border-top: 1px solid #ddd;
+      border-top: 1px solid #ddd !important;
+      //margin: -1px 0 0;
+      align-items: stretch;
+
+      @include mobile {
+        flex-wrap: wrap;
+        flex: 1 0 100%;
+        margin-left: -1px;
+      }
+
+      //.flex-label {
+      //  flex: 1 0 200px;
+      //}
+    }
+
+    .flex-label, .flex-field div.flex-label {
+      padding: 10px 20px;
+      background: #f7f7f7;
+      flex: 1 0;
+      text-align: right;
+      justify-content: flex-end;
+      font-weight: 700;
+      color: #777;
+    }
+
+    .flex-input, .flex-field div.flex-input {
+      //margin: -10px;
+      flex: 2 0;
+      position: relative;
+      padding: 0 20px;
+      font-size: 20px;
+      color: black;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+
+      input {
+        text-transform: uppercase;
+        width: 100%;
+        border: none;
+        outline: none;
+        line-height: 50px;
+        min-height: 50px;
+        color: #333;
+
+      }
+    }
+  }
+}
+
+

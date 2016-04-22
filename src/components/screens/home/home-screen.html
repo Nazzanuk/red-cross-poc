@@ -1,0 +1,115 @@
+<script type="text/ng-template" id="home-screen.html">
+    <div screen="home">
+
+        <!--&lt;!&ndash; one way pass values to component &ndash;&gt;-->
+        <!--<hero-item-->
+        <!--img="https://unsplash.it/1200/500/?random"-->
+        <!--heading="Welcome to Angular Base"-->
+        <!--&gt;</hero-item>-->
+
+        <content-item>
+            <content>
+
+                <a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print pull-right">Save as PDF</a>
+
+                <p>
+                    <strong>American Red Cross Biomedical Services Washington, DC 20006</strong>
+                </p>
+
+                <h1>Form: Trima Apheresis Procedure Record</h1>
+                <!--<hr>-->
+                <div class="flex-table">
+                    <div class="flex-row">
+                        <div class="flex-content">Doc No: ARC-DOC-011307</div>
+                        <div class="flex-content">Subdiv: 15 - Collection - Procurement</div>
+                        <div class="flex-content">Doc Level: 4 - Tool or Supporting Document</div>
+                        <div class="flex-content">ARC Version: 6.4</div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-content">Level 4 Subtype: Form</div>
+                        <div class="flex-content">Training Subtype:</div>
+                        <div class="flex-content">Mang Fac: BHQ</div>
+                    </div>
+                </div>
+
+                <div class="flex-table">
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">Collection Date</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().collectionDate"></div>
+                        </div>
+                        <div class="flex-field">
+                            <div class="flex-label">DIN</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().DIN"></div>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">Trima Maximo Number</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().TrimaNo"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex-row">
+                        <div class="flex-header">1. Donor Information</div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">Last Name</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().LastName"></div>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">Hct</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().Hct"></div>
+                        </div>
+
+                        <div class="flex-field">
+                            <div class="flex-label">Total Blood Volume (TBV)</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().TBV"></div>
+                        </div>
+
+                        <div class="flex-field">
+                            <div class="flex-label">Platelet Pre-count</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().PlateletPreCount"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex-row">
+                        <div class="flex-header"> 2. Supply Information</div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">Item</div>
+                            <div class="flex-label" style="flex: 2;text-align: left;justify-content: flex-start">Lot No</div>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">ACD-A</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().ACDA"></div>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">0.9% Normal Saline</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().normalSaline"></div>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="flex-field">
+                            <div class="flex-label">Additive</div>
+                            <div class="flex-input"><input placeholder="-" ng-model="getFormData().Additive"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p></p>
+
+
+            </content>
+        </content-item>
+
+    </div>
+</script>

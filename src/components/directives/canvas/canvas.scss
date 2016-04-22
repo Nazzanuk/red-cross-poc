@@ -1,0 +1,16 @@
+canvas-item {
+  .canvas {
+    canvas {
+      background: white;
+      //height: 200px;
+      //width: 100%;
+      //margin: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.15);
+      //display: block;
+      cursor: crosshair;
+      //cursor: none;
+      cursor: url('icons/pen-32.png') 0 32, auto;
+    }
+
+  }
+}
