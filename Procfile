@@ -1,1 +1,1 @@
-web: ls && cd server/server && node server.js
+web: ls && cd server && node server.js
