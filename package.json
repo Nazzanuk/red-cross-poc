@@ -24,6 +24,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.1",
     "gulp-shell": "^0.5.1",
-    "lodash": "^4.3.0"
+    "lodash": "^4.3.0",
+    "node-phantom": "^0.2.5",
+    "phantom": "^2.0.10"
   }
 }

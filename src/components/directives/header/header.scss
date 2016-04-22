@@ -1,14 +1,30 @@
 header-item {
   .header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 50px;
     line-height: 50px;
 
-    background: white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    background: darken($primary, 10%);
+    //background: linear-gradient(darken($primary, 10%) 0%,darken($primary, 10%) 100%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: white;
+    //border-bottom: 2px solid $primary;
+
+    @media print {
+      display: none;
+    }
+
+    .fa-times {
+      transform: rotate(45deg);
+      //color: $primary;
+    }
+
+    strong {
+      font-weight: 900;
+    }
 
     .header-menu {
       float: right;
@@ -16,17 +32,20 @@ header-item {
       .menu-item {
         float: left;
         line-height: 48px;
-        padding: 0 20px;
-        border-bottom: 2px solid white;
+        padding: 0 30px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0);
         transition: .3s;
         cursor: pointer;
+        //background: rgba(255,255,255,0.1);
 
         &:hover {
-          border-bottom: 2px solid #ccc;
+          //border-bottom: 2px solid #ccc;
         }
 
         &.active {
-          border-bottom: 2px solid $primary;
+          //border-bottom: 2px solid #fff;
+
+          background: rgba(0,0,0,0.1);
         }
       }
     }

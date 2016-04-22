@@ -14,7 +14,7 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
 
     // Now set up the states
     $stateProvider
-        .state(new Route('home', "/", resolve))
+        .state(new Route('home', "/?formData", resolve))
         .state(new Route('about', "/about", resolve));
 
     //use real urls instead of hashes
@@ -22,12 +22,14 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
 });
 
 class Route {
-    constructor(name, url, resolve) {
+    constructor(name, url, resolve, params) {
         _.extend(this, {
             name,
             url,
+            params,
             templateUrl: `${_.kebabCase(name)}-screen.html`,
             controller: _.upperFirst(_.camelCase(`${name}Screen`)),
+            reloadOnSearch: false,
             resolve
         });
     }
