@@ -9,25 +9,25 @@ var fs = require("fs");
 module.exports = {
     print(req, res) {
         var url = req.headers.referer, now = Date.now(), ratio = 0.7, formData = JSON.parse(req.query.formData);
-        var imageFileName = `signature-${now}.png`, signature;;
+        var imageFileName = `signature-${formData.signatureCode}.png`;
 
         formData.savedImage = imageFileName;
 
         if (req.query.formData) {
-            signature = formData.signature;
-            delete formData.signature;
+            //signature = formData.signature;
+            //delete formData.signature;
             url = url + '#/?formData=' + JSON.stringify(formData);
         }
 
         console.log('formData', formData);
 
-        if (signature) {
-            let base64Data = signature.replace(/^data:image\/png;base64,/, "");
-
-            require("fs").writeFile(`../release/public/img/${imageFileName}`, base64Data, 'base64', function (err) {
-                console.log(err);
-            });
-        }
+        //if (signature) {
+        //    let base64Data = signature.replace(/^data:image\/png;base64,/, "");
+        //
+        //    require("fs").writeFile(`../release/public/img/${imageFileName}`, base64Data, 'base64', function (err) {
+        //        console.log(err);
+        //    });
+        //}
 
 
         var sitepage = null;
@@ -54,7 +54,7 @@ module.exports = {
                         res.redirect(`/public/pdf/form-${now}.pdf`);
                         phInstance.exit();
                     });
-                }, 800);
+                }, 1000);
             });
 
     },

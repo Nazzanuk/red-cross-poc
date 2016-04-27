@@ -82,12 +82,26 @@ app.service('Canvas', function ($state, $stateParams, $timeout) {
     //};
 });
 
-app.service('Form', function ($state, $stateParams, $timeout) {
+app.service('Form', function ($state, $stateParams, $timeout, $http) {
 
-    var formData = {};
+    var formData = {},
+        $canvas;
+
+    var genPdf = function genPdf() {
+        if ($canvas) saveImg($canvas);
+        window.open(genPdfUrl(), "PDF");
+    };
 
     var genPdfUrl = function genPdfUrl() {
         return '/print/?formData=' + JSON.stringify(formData);
+    };
+
+    var saveImg = function saveImg($canvas) {
+        var img = $canvas[0].toDataURL("image/png");
+
+        return $http.post('/image', { file: img, code: formData.signatureCode }).then(function (data) {
+            console.log(data);
+        });
     };
 
     var updateParams = function updateParams() {
@@ -116,7 +130,11 @@ app.service('Form', function ($state, $stateParams, $timeout) {
             return formData;
         },
         updateParams: updateParams,
+        setCanvas: function setCanvas(canvas) {
+            return $canvas = canvas;
+        },
         getImg: getImg,
+        genPdf: genPdf,
         genPdfUrl: genPdfUrl
     };
 });
@@ -153,14 +171,37 @@ app.service('Menu', function ($state, $stateParams, $timeout) {
     };
 });
 
+app.component('headerItem', {
+    templateUrl: 'header.html',
+    controllerAs: 'header',
+    bindings: {
+        img: '@'
+    },
+    controller: function controller(Menu) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            getPages: Menu.getPages,
+            setPage: Menu.setPage,
+            isCurrentPage: Menu.isCurrentPage
+        });
+    }
+});
+
 app.component('canvasItem', {
     templateUrl: 'canvas.html',
     controllerAs: 'canvas',
     transclude: {},
-    bindings: {},
+    bindings: {
+        id: '@'
+    },
     controller: function controller($element, $timeout, $scope, Form, $http) {
         var color = '#111',
-            thickness = 1;
+            thickness = 1,
+            code = _.random(0, 100000);
 
         var $canvas,
             ctx,
@@ -172,18 +213,11 @@ app.component('canvasItem', {
             ctx.clearRect(0, 0, $canvas[0].width, $canvas[0].height);
         };
 
-        var saveImg = function saveImg() {
-
-            var img = $canvas[0].toDataURL("image/png");
-
-            $http.post('/image', { file: img }).then(function (data) {
-                console.log(data);
-            });
-        };
+        var genPdf = function genPdf() {};
 
         var setImg = function setImg() {
-            var img = $canvas[0].toDataURL("image/png");
-            Form.getFormData().signature = encodeURIComponent(img);
+            Form.setCanvas($canvas);
+            Form.getFormData().signatureCode = code;
             Form.updateParams();
         };
 
@@ -207,11 +241,6 @@ app.component('canvasItem', {
             });
 
             $canvas.on('mousemove touchmove', function (e) {
-                //console.log('e', e);
-                //console.log('this', this);
-                //console.log(e.pageY - $canvas.offset().top);
-                //console.log(e.pageY - $canvas.offsetTop);
-
                 if (!paint) return;
                 var mouseX = e.pageX - $canvas.offset().left;
                 var mouseY = e.pageY - $canvas.offset().top;
@@ -289,7 +318,7 @@ app.component('canvasItem', {
         init();
 
         _.extend(this, {
-            saveImg: saveImg,
+            genPdf: genPdf,
             clear: clear
         });
     }
@@ -332,43 +361,6 @@ app.component('contentItem', {
     }
 });
 
-app.component('headerItem', {
-    templateUrl: 'header.html',
-    controllerAs: 'header',
-    bindings: {
-        img: '@'
-    },
-    controller: function controller(Menu) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {
-            getPages: Menu.getPages,
-            setPage: Menu.setPage,
-            isCurrentPage: Menu.isCurrentPage
-        });
-    }
-});
-
-app.component('heroItem', {
-    templateUrl: 'hero.html',
-    controllerAs: 'hero',
-    bindings: {
-        img: '@',
-        heading: '@'
-    },
-    controller: function controller($element, $timeout) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {});
-    }
-});
-
 app.component('tableItem', { templateUrl: 'table.html' });
 
 app.component('tableRow', { templateUrl: 'table-row.html' });
@@ -406,6 +398,23 @@ app.component('tableContents', {
     }
 });
 
+app.component('heroItem', {
+    templateUrl: 'hero.html',
+    controllerAs: 'hero',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {});
+    }
+});
+
 app.controller('AboutScreen', function ($element, $timeout, $scope) {
 
     var init = function init() {
@@ -427,6 +436,7 @@ app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams,
         getFormData: Form.getFormData,
         updateParams: Form.updateParams,
         getImg: Form.getImg,
+        genPdf: Form.genPdf,
         genPdfUrl: Form.genPdfUrl
     });
 });

@@ -2,9 +2,11 @@ app.component('canvasItem', {
     templateUrl: 'canvas.html',
     controllerAs: 'canvas',
     transclude: {},
-    bindings: {},
+    bindings: {
+        id:'@'
+    },
     controller: function ($element, $timeout, $scope, Form, $http) {
-        var color = '#111', thickness = 1;
+        var color = '#111', thickness = 1, code = _.random(0,100000);
 
         var $canvas, ctx, paint = false, lastX = 0, lastY = 0;
 
@@ -12,18 +14,12 @@ app.component('canvasItem', {
             ctx.clearRect(0, 0, $canvas[0].width, $canvas[0].height);
         };
 
-        var saveImg = () => {
-
-            var img = $canvas[0].toDataURL("image/png");
-
-            $http.post('/image', {file: img}).then((data) => {
-                console.log(data);
-            });
+        var genPdf = () => {
         };
 
         var setImg = () => {
-            var img = $canvas[0].toDataURL("image/png");
-            Form.getFormData().signature = encodeURIComponent(img);
+            Form.setCanvas($canvas);
+            Form.getFormData().signatureCode = code;
             Form.updateParams();
         };
 
@@ -48,11 +44,6 @@ app.component('canvasItem', {
             });
 
             $canvas.on('mousemove touchmove', function (e) {
-                //console.log('e', e);
-                //console.log('this', this);
-                //console.log(e.pageY - $canvas.offset().top);
-                //console.log(e.pageY - $canvas.offsetTop);
-
                 if (!paint) return;
                 var mouseX = e.pageX - $canvas.offset().left;
                 var mouseY = e.pageY - $canvas.offset().top;
@@ -132,7 +123,7 @@ app.component('canvasItem', {
         init();
 
         _.extend(this, {
-            saveImg,
+            genPdf,
             clear
         });
     }

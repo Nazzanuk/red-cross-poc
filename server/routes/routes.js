@@ -8,6 +8,6 @@ module.exports = {
         app.get('/print/:url', Get.print);
         app.get('/print', Get.print);
         app.get('*', Get.index);
-        app.post('/image/', Post.image2);
+        app.post('/image/', Post.image);
     }
 };

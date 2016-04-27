@@ -35,28 +35,6 @@
 
 
 
-<script type="text/ng-template" id="canvas.html">
-    <div class="canvas">
-        <!--<div class="container">-->
-            <!--<h3>Sign here:</h3>-->
-            <!--<br>-->
-            <canvas id="canvas"></canvas>
-
-        <div>
-            <div class="butn hidden-print" ng-click="canvas.clear()">Clear</div>
-
-        </div>
-
-        <!--</div>-->
-    </div>
-</script>
-<script type="text/ng-template" id="content.html">
-    <div class="content" id="print_me">
-        <div class="container-fluid">
-            <div ng-transclude="content"></div>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container-fluid">
@@ -74,12 +52,28 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="hero.html">
-    <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
-            <div class="banner-overlay">
-                {{hero.heading}}
-            </div>
+<script type="text/ng-template" id="canvas.html">
+    <div class="canvas">
+        <!--<div class="container">-->
+            <!--<h3>Sign here:</h3>-->
+            <!--<br>-->
+            <canvas id="canvas"></canvas>
+
+        <div>
+            <div class="butn hidden-print" ng-click="canvas.clear()">Clear</div>
+
+        </div>
+
+        <!--</div>-->
+    </div>
+</script>
+
+
+
+<script type="text/ng-template" id="content.html">
+    <div class="content" id="print_me">
+        <div class="container-fluid">
+            <div ng-transclude="content"></div>
         </div>
     </div>
 </script>
@@ -107,6 +101,15 @@
     <div class="flex-field">
         <div class="flex-label">{{field.label}}</div>
         <div class="flex-input"><input placeholder="-" ng-model="getFormData()[field.id]"></div>
+    </div>
+</script>
+<script type="text/ng-template" id="hero.html">
+    <div class="hero">
+        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+            <div class="banner-overlay">
+                {{hero.heading}}
+            </div>
+        </div>
     </div>
 </script>
 <script type="text/ng-template" id="about-screen.html">
@@ -190,7 +193,7 @@
 
                 <p>&nbsp;</p>
 
-                <a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print">Save as PDF</a>
+                <div ng-click="genPdf()" target="_blank" class="butn hidden-print">Save as PDF</div>
 
             </content>
         </content-item>
