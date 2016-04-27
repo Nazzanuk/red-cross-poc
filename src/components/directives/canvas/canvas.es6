@@ -3,40 +3,63 @@ app.component('canvasItem', {
     controllerAs: 'canvas',
     transclude: {},
     bindings: {},
-    controller: function ($element, $timeout) {
+    controller: function ($element, $timeout, $scope, Form, $http) {
         var color = '#111', thickness = 1;
 
         var $canvas, ctx, paint = false, lastX = 0, lastY = 0;
 
         var clear = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, $canvas[0].width, $canvas[0].height);
         };
 
         var saveImg = () => {
-            ReImg.fromCanvas($canvas[0]).downloadPng();
+
+            var img = $canvas[0].toDataURL("image/png");
+
+            $http.post('/image', {file: img}).then((data) => {
+                console.log(data);
+            });
+        };
+
+        var setImg = () => {
+            var img = $canvas[0].toDataURL("image/png");
+            Form.getFormData().signature = encodeURIComponent(img);
+            Form.updateParams();
         };
 
         var events = () => {
             $canvas.on('mousedown touchstart', function (e) {
+                console.log(e.type);
                 paint = true;
 
                 ctx.fillStyle = color;
                 ctx.lineWidth = thickness;
-                lastX = e.pageX - this.offsetLeft;
-                lastY = e.pageY - this.offsetTop;
+                lastX = e.pageX - $canvas.offset().left;
+                lastY = e.pageY - $canvas.offset().top;
                 return false;
             });
 
-            $canvas.on('mouseup mouseleave touchend', (e) => (console.log(e.type),paint = false));
+            $canvas.on('mouseup mouseleave touchend', (e) => {
+                setImg();
+                console.log(e.type);
+                paint = false;
+                $scope.$apply();
+
+            });
 
             $canvas.on('mousemove touchmove', function (e) {
+                //console.log('e', e);
+                //console.log('this', this);
+                //console.log(e.pageY - $canvas.offset().top);
+                //console.log(e.pageY - $canvas.offsetTop);
+
                 if (!paint) return;
-                var mouseX = e.pageX - this.offsetLeft;
-                var mouseY = e.pageY - this.offsetTop;
+                var mouseX = e.pageX - $canvas.offset().left;
+                var mouseY = e.pageY - $canvas.offset().top;
 
                 if (e.type == 'touchmove') {
-                    mouseX = e.originalEvent.touches[0].clientX - e.target.offsetLeft;
-                    mouseY = e.originalEvent.touches[0].clientY -  e.target.offsetTop;
+                    mouseX = e.originalEvent.touches[0].clientX - $canvas.offset().left;
+                    mouseY = e.originalEvent.touches[0].clientY - $canvas.offset().top;
                 }
 
                 // find all points between
@@ -100,7 +123,7 @@ app.component('canvasItem', {
         var init = () => {
             $canvas = $element.find('canvas');
             ctx = $canvas[0].getContext("2d");
-            $canvas[0].width = $canvas.parent().width();
+            $canvas[0].width = 300;
             $canvas[0].height = 300;
 
             events();

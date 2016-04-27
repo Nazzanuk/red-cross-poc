@@ -1,0 +1,26 @@
+<script type="text/ng-template" id="table.html">
+    <div class="flex-table" ng-transclude></div>
+</script>
+
+<script type="text/ng-template" id="table-contents.html">
+    <div class="flex-row">
+        <div class="flex-content" ng-repeat="item in contents.items track by $index">{{item}}</div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="table-row.html">
+    <div class="flex-row" ng-transclude></div>
+</script>
+
+<script type="text/ng-template" id="table-header.html">
+    <div class="flex-row">
+        <div class="flex-header">{{header.label}}</div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="table-field.html">
+    <div class="flex-field">
+        <div class="flex-label">{{field.label}}</div>
+        <div class="flex-input"><input placeholder="-" ng-model="getFormData()[field.id]"></div>
+    </div>
+</script>

@@ -53,6 +53,74 @@ var Route = function Route(name, url, resolve, params) {
     });
 };
 
+app.service('Canvas', function ($state, $stateParams, $timeout) {
+
+    //var formData = {};
+    //
+    //var genPdfUrl = () => '/print/?formData=' + JSON.stringify(formData);
+    //
+    //var updateParams = () => {
+    //    $state.transitionTo('home', {formData: JSON.stringify(formData)}, {notify: false, reload: false});
+    //};
+    //
+    //var events = () => {
+    //    $('body').on('change', 'input', updateParams);
+    //};
+    //
+    //var init = () => {
+    //    events();
+    //    formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
+    //    console.log('initial formData:', formData);
+    //};
+    //
+    //init();
+    //
+    //return {
+    //    getFormData: () => formData,
+    //    updateParams,
+    //    genPdfUrl
+    //};
+});
+
+app.service('Form', function ($state, $stateParams, $timeout) {
+
+    var formData = {};
+
+    var genPdfUrl = function genPdfUrl() {
+        return '/print/?formData=' + JSON.stringify(formData);
+    };
+
+    var updateParams = function updateParams() {
+        $state.transitionTo('home', { formData: JSON.stringify(formData) }, { notify: false, reload: false });
+    };
+
+    var events = function events() {
+        $('body').on('change', 'input', updateParams);
+    };
+
+    var getImg = function getImg() {
+        return decodeURIComponent(formData.signature);
+    };
+
+    var init = function init() {
+        events();
+        formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
+        //if (formData.signature) formData.signature = decodeURIComponent(formData.signature);
+        console.log('initial formData:', formData);
+    };
+
+    init();
+
+    return {
+        getFormData: function getFormData() {
+            return formData;
+        },
+        updateParams: updateParams,
+        getImg: getImg,
+        genPdfUrl: genPdfUrl
+    };
+});
+
 app.service('Menu', function ($state, $stateParams, $timeout) {
 
     var currentPage,
@@ -90,7 +158,7 @@ app.component('canvasItem', {
     controllerAs: 'canvas',
     transclude: {},
     bindings: {},
-    controller: function controller($element, $timeout) {
+    controller: function controller($element, $timeout, $scope, Form, $http) {
         var color = '#111',
             thickness = 1;
 
@@ -101,36 +169,56 @@ app.component('canvasItem', {
             lastY = 0;
 
         var clear = function clear() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, $canvas[0].width, $canvas[0].height);
         };
 
         var saveImg = function saveImg() {
-            ReImg.fromCanvas($canvas[0]).downloadPng();
+
+            var img = $canvas[0].toDataURL("image/png");
+
+            $http.post('/image', { file: img }).then(function (data) {
+                console.log(data);
+            });
+        };
+
+        var setImg = function setImg() {
+            var img = $canvas[0].toDataURL("image/png");
+            Form.getFormData().signature = encodeURIComponent(img);
+            Form.updateParams();
         };
 
         var events = function events() {
             $canvas.on('mousedown touchstart', function (e) {
+                console.log(e.type);
                 paint = true;
 
                 ctx.fillStyle = color;
                 ctx.lineWidth = thickness;
-                lastX = e.pageX - this.offsetLeft;
-                lastY = e.pageY - this.offsetTop;
+                lastX = e.pageX - $canvas.offset().left;
+                lastY = e.pageY - $canvas.offset().top;
                 return false;
             });
 
             $canvas.on('mouseup mouseleave touchend', function (e) {
-                return console.log(e.type), paint = false;
+                setImg();
+                console.log(e.type);
+                paint = false;
+                $scope.$apply();
             });
 
             $canvas.on('mousemove touchmove', function (e) {
+                //console.log('e', e);
+                //console.log('this', this);
+                //console.log(e.pageY - $canvas.offset().top);
+                //console.log(e.pageY - $canvas.offsetTop);
+
                 if (!paint) return;
-                var mouseX = e.pageX - this.offsetLeft;
-                var mouseY = e.pageY - this.offsetTop;
+                var mouseX = e.pageX - $canvas.offset().left;
+                var mouseY = e.pageY - $canvas.offset().top;
 
                 if (e.type == 'touchmove') {
-                    mouseX = e.originalEvent.touches[0].clientX - e.target.offsetLeft;
-                    mouseY = e.originalEvent.touches[0].clientY - e.target.offsetTop;
+                    mouseX = e.originalEvent.touches[0].clientX - $canvas.offset().left;
+                    mouseY = e.originalEvent.touches[0].clientY - $canvas.offset().top;
                 }
 
                 // find all points between
@@ -192,7 +280,7 @@ app.component('canvasItem', {
         var init = function init() {
             $canvas = $element.find('canvas');
             ctx = $canvas[0].getContext("2d");
-            $canvas[0].width = $canvas.parent().width();
+            $canvas[0].width = 300;
             $canvas[0].height = 300;
 
             events();
@@ -281,6 +369,43 @@ app.component('heroItem', {
     }
 });
 
+app.component('tableItem', { templateUrl: 'table.html' });
+
+app.component('tableRow', { templateUrl: 'table-row.html' });
+
+app.component('tableHeader', {
+    templateUrl: 'table-header.html',
+    controllerAs: 'header',
+    bindings: {
+        label: '@'
+    }
+});
+
+app.component('tableField', {
+    templateUrl: 'table-field.html',
+    controllerAs: 'field',
+    bindings: {
+        label: '@',
+        id: '@'
+    },
+    controller: function controller($scope, Form) {
+        _.extend($scope, {
+            getFormData: Form.getFormData,
+            updateParams: Form.updateParams,
+            genPdfUrl: Form.genPdfUrl
+        });
+    }
+});
+
+app.component('tableContents', {
+    templateUrl: 'table-contents.html',
+    controllerAs: 'contents',
+    transclude: {},
+    bindings: {
+        items: '='
+    }
+});
+
 app.controller('AboutScreen', function ($element, $timeout, $scope) {
 
     var init = function init() {
@@ -292,35 +417,16 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
     _.extend($scope, {});
 });
 
-app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope) {
+app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
-    var formData = {};
-
-    var genPdfUrl = function genPdfUrl() {
-        return '/print/?formData=' + JSON.stringify(formData);
-    };
-
-    var updateParams = function updateParams() {
-        $state.transitionTo('home', { formData: JSON.stringify(formData) }, { notify: false, reload: false });
-    };
-
-    var events = function events() {
-        $element.on('change', 'input', updateParams);
-    };
-
-    var init = function init() {
-        events();
-        formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
-        console.log('initial formData:', formData);
-    };
+    var init = function init() {};
 
     init();
 
     _.extend($scope, {
-        getFormData: function getFormData() {
-            return formData;
-        },
-        updateParams: updateParams,
-        genPdfUrl: genPdfUrl
+        getFormData: Form.getFormData,
+        updateParams: Form.updateParams,
+        getImg: Form.getImg,
+        genPdfUrl: Form.genPdfUrl
     });
 });

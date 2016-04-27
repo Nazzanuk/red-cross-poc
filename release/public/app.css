@@ -295,3 +295,24 @@ hero-item .hero .hero-banner {
     color: white;
     font-size: 50px;
     font-weight: 100; }
+
+table-item table-row, table-item table-contents, table-item table-header {
+  -webkit-flex: 1 0 100%;
+      -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+table-item table-field {
+  -webkit-flex: 1 0;
+      -ms-flex: 1 0;
+          flex: 1 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  @media (max-width: 767px) {
+    table-item table-field {
+      -webkit-flex: 1 0 100%;
+          -ms-flex: 1 0 100%;
+              flex: 1 0 100%; } }
