@@ -2,37 +2,20 @@
 
 var phantom = require('phantom');
 var fs = require("fs");
-
-
-//var system = require('system');
+var OCD = require("../services/ocd");
 
 module.exports = {
     print(req, res) {
         var url = req.headers.referer, now = Date.now(), ratio = 0.7, formData = JSON.parse(req.query.formData);
         var imageFileName = `signature-${formData.signatureCode}.png`;
+        var sitepage = null, phInstance = null;
 
         formData.savedImage = imageFileName;
-
-        if (req.query.formData) {
-            //signature = formData.signature;
-            //delete formData.signature;
-            url = url + '#/?formData=' + JSON.stringify(formData);
-        }
+        if (req.query.formData) url = url + '#/?formData=' + JSON.stringify(formData);
+        delete formData.signature;
 
         console.log('formData', formData);
 
-        //if (signature) {
-        //    let base64Data = signature.replace(/^data:image\/png;base64,/, "");
-        //
-        //    require("fs").writeFile(`../release/public/img/${imageFileName}`, base64Data, 'base64', function (err) {
-        //        console.log(err);
-        //    });
-        //}
-
-
-        var sitepage = null;
-        var phInstance = null;
-        //
         phantom.create()
             .then(instance => {
                 phInstance = instance;
@@ -50,8 +33,10 @@ module.exports = {
                 console.log('status', status);
                 setTimeout(() => {
                     sitepage.render(`../release/public/pdf/form-${now}.pdf`).then(() => {
+                        console.log('Rendered Page - ' + `../release/public/pdf/form-${now}.pdf`);
                         //res.download('../release/public/pdf/pdf.pdf'); // Set disposition and send it.
                         res.redirect(`/public/pdf/form-${now}.pdf`);
+                        OCD.upload(`../release/public/pdf/form-${now}.pdf`, `form-${now}.pdf`);
                         phInstance.exit();
                     });
                 }, 1000);
@@ -63,4 +48,3 @@ module.exports = {
         res.render('index', {title: "Red Cross POC"});
     }
 };
-
