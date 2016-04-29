@@ -23,9 +23,9 @@ $secondary: #454545;
 html, body {
   font-family: 'Source Sans Pro', sans-serif;
   overflow-x: hidden;
-  background: rgb(244, 244, 244);
+  //background: rgb(244, 244, 244);
 
-  background: radial-gradient(ellipse at center, #fff 70%, #ffe8e8 100%);
+  //background: radial-gradient(ellipse at center, #fff 70%, #ffe8e8 100%);
 
   @media print {
     background: white;
@@ -45,20 +45,20 @@ html, body {
   //overflow: hidden;
   //overflow-y: auto;
 
-  @include mobile {
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-  }
+  //@include mobile {
+  //  top: 10px;
+  //  left: 10px;
+  //  right: 10px;
+  //  bottom: 10px;
+  //}
 
-  @media print {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: static;
-  }
+  //@media print {
+  //  top: 0;
+  //  left: 0;
+  //  bottom: 0;
+  //  right: 0;
+  //  position: static;
+  //}
 
 }
 
