@@ -18,18 +18,23 @@ app.service('Form', ($state, $stateParams, $timeout, $http) => {
     };
 
     var updateParams = () => {
-        $state.transitionTo('home', {formData: JSON.stringify(formData)}, {notify: false, reload: false});
+        $state.transitionTo('form', {formData: JSON.stringify(formData)}, {notify: false, reload: false});
     };
 
     var events = () => {
-        $('body').on('change', 'input', updateParams);
+        $('body').on('change', '[screen="form"] input', updateParams);
     };
 
     var getImg = () => decodeURIComponent(formData.signature);
 
+    var loadFormData = () => {
+        formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
+
+    }
+
     var init = () => {
         events();
-        formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
+        loadFormData();
         //if (formData.signature) formData.signature = decodeURIComponent(formData.signature);
         console.log('initial formData:', formData);
     };
@@ -37,6 +42,7 @@ app.service('Form', ($state, $stateParams, $timeout, $http) => {
     init();
 
     return {
+        loadFormData,
         getFormData: () => formData,
         updateParams,
         setCanvas: canvas => $canvas = canvas,

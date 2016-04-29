@@ -11,7 +11,7 @@ module.exports = {
         var sitepage = null, phInstance = null;
 
         formData.savedImage = imageFileName;
-        if (req.query.formData) url = url + '#/?formData=' + JSON.stringify(formData);
+        if (req.query.formData) url = url + '#/form/?formData=' + JSON.stringify(formData);
         delete formData.signature;
 
         console.log('formData', formData);

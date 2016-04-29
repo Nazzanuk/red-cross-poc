@@ -22,6 +22,7 @@
 </head>
 <body data-ng-app="app">
 
+
 <div class="app">
     <div class="in-app" style="position: relative">
         <header-item></header-item>
@@ -35,23 +36,6 @@
 
 
 
-<script type="text/ng-template" id="header.html">
-    <div class="header">
-        <div class="container-fluid">
-            <strong><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
-
-            <div class="header-menu">
-                <div class="menu-item"
-                     ng-repeat="page in header.getPages()"
-                     ng-click="header.setPage(page.slug)"
-                     ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}</div>
-            </div>
-        </div>
-
-
-    </div>
-</script>
 <script type="text/ng-template" id="canvas.html">
     <div class="canvas">
         <!--<div class="container">-->
@@ -75,6 +59,72 @@
         <div class="container-fluid">
             <div ng-transclude="content"></div>
         </div>
+    </div>
+</script>
+<script type="text/ng-template" id="hero.html">
+    <div class="hero">
+        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+            <div class="banner-overlay">
+                {{hero.heading}}
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="header.html">
+    <div class="header">
+        <div class="container-fluid">
+            <strong><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
+
+            <div class="header-menu">
+                <div class="menu-item"
+                     ng-repeat="page in header.getPages()"
+                     ng-click="header.setPage(page.slug)"
+                     ng-class="{active:header.isCurrentPage(page.slug)}"
+                >{{page.name}}</div>
+            </div>
+        </div>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="scan.html">
+    <div class="scan">
+        <div ng-show="scan.isStatus('empty')">
+            <div class="scan-header">Select Image</div>
+            <label for="scan-file" class="butn">Select Image</label>
+            <input id="scan-file" class="hide" type="file" custom-on-change="verify.changeProfile" accept="image/*">
+
+        </div>
+        <div ng-show="scan.isStatus('selected')">
+            <div class="scan-header"><span>Reading Image &nbsp; <i class="fa fa-spin fa-cog"></i></span></div>
+        </div>
+        <div ng-show="scan.isStatus('populating')">
+            <div class="scan-header"><span>Populating Form &nbsp; <i class="fa fa-spin fa-cog"></i></span></div>
+        </div>
+        <div ng-show="scan.isStatus('ready')">
+            <div class="scan-header"><span>Ready &nbsp; <i class="fa fa-check"></i></span></div>
+            <div class="butn" ui-sref="form({formData:scan.getFormData()})">View Form</div>
+        </div>
+
+        <img id="blah" ng-if="scan.getImage()" src="{{scan.getImage()}}" class="scan-img"/>
+    </div>
+</script>
+<script type="text/ng-template" id="splash.html">
+    <div class="splash">
+        <div class="splash-overlay">
+            <div class="splash-header">Red Cross Forms</div>
+
+            <div class="splash-buttons">
+                <div class="butn white" ui-sref="scan">Scan ID</div>
+                <div class="butn white" ui-sref="form({formData:'{}'})">Fill Manually</div>
+            </div>
+
+            <div class="splash-box">
+
+
+            </div>
+        </div>
+
     </div>
 </script>
 <script type="text/ng-template" id="table.html">
@@ -103,15 +153,6 @@
         <div class="flex-input"><input placeholder="-" ng-model="getFormData()[field.id]"></div>
     </div>
 </script>
-<script type="text/ng-template" id="hero.html">
-    <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
-            <div class="banner-overlay">
-                {{hero.heading}}
-            </div>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="about-screen.html">
     <div screen="about">
 
@@ -122,13 +163,14 @@
         ></hero-item>
     </div>
 </script>
-<script type="text/ng-template" id="home-screen.html">
-    <div screen="home">
+<script type="text/ng-template" id="form-screen.html">
+    <div screen="form">
 
         <content-item>
             <content>
 
                 <a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print pull-right">Save as PDF</a>
+                <a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print pull-right" style="margin-right: 10px;">Scan Document</a>
 
                 <p>
                     <strong>American Red Cross Biomedical Services Washington, DC 20006</strong>
@@ -197,6 +239,21 @@
 
             </content>
         </content-item>
+
+    </div>
+</script>
+<script type="text/ng-template" id="home-screen.html">
+    <div screen="home">
+        <splash-item></splash-item>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="scan-screen.html">
+    <div screen="scan">
+
+        <scan-item></scan-item>
+
 
     </div>
 </script>

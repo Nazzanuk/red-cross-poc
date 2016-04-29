@@ -33,7 +33,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/");
 
     // Now set up the states
-    $stateProvider.state(new Route('home', "/?formData", resolve)).state(new Route('about', "/about", resolve));
+    $stateProvider.state(new Route('home', "/", resolve)).state(new Route('form', "/form/?formData", resolve)).state(new Route('about', "/about", resolve)).state(new Route('scan', "/scan", resolve));
 
     //use real urls instead of hashes
     //$locationProvider.html5Mode(true);
@@ -105,20 +105,24 @@ app.service('Form', function ($state, $stateParams, $timeout, $http) {
     };
 
     var updateParams = function updateParams() {
-        $state.transitionTo('home', { formData: JSON.stringify(formData) }, { notify: false, reload: false });
+        $state.transitionTo('form', { formData: JSON.stringify(formData) }, { notify: false, reload: false });
     };
 
     var events = function events() {
-        $('body').on('change', 'input', updateParams);
+        $('body').on('change', '[screen="form"] input', updateParams);
     };
 
     var getImg = function getImg() {
         return decodeURIComponent(formData.signature);
     };
 
+    var loadFormData = function loadFormData() {
+        formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
+    };
+
     var init = function init() {
         events();
-        formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
+        loadFormData();
         //if (formData.signature) formData.signature = decodeURIComponent(formData.signature);
         console.log('initial formData:', formData);
     };
@@ -126,6 +130,7 @@ app.service('Form', function ($state, $stateParams, $timeout, $http) {
     init();
 
     return {
+        loadFormData: loadFormData,
         getFormData: function getFormData() {
             return formData;
         },
@@ -171,24 +176,13 @@ app.service('Menu', function ($state, $stateParams, $timeout) {
     };
 });
 
-app.component('headerItem', {
-    templateUrl: 'header.html',
-    controllerAs: 'header',
-    bindings: {
-        img: '@'
-    },
-    controller: function controller(Menu) {
+app.service('Scan', function ($state, $stateParams, $timeout, $http) {
 
-        var init = function init() {};
+    var init = function init() {};
 
-        init();
+    init();
 
-        _.extend(this, {
-            getPages: Menu.getPages,
-            setPage: Menu.setPage,
-            isCurrentPage: Menu.isCurrentPage
-        });
-    }
+    return {};
 });
 
 app.component('canvasItem', {
@@ -361,6 +355,124 @@ app.component('contentItem', {
     }
 });
 
+app.component('heroItem', {
+    templateUrl: 'hero.html',
+    controllerAs: 'hero',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {});
+    }
+});
+
+app.component('headerItem', {
+    templateUrl: 'header.html',
+    controllerAs: 'header',
+    bindings: {
+        img: '@'
+    },
+    controller: function controller(Menu) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            getPages: Menu.getPages,
+            setPage: Menu.setPage,
+            isCurrentPage: Menu.isCurrentPage
+        });
+    }
+});
+
+app.component('scanItem', {
+    templateUrl: 'scan.html',
+    controllerAs: 'scan',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout, $scope) {
+
+        var image = "",
+            status = "empty";
+
+        var events = function events() {
+            $($element).find('#scan-file').change(function () {
+                console.log('hello');
+                readURL(this);
+            });
+        };
+
+        var simulate = function simulate() {
+            status = "selected";
+
+            $timeout(function () {
+                return status = "populating";
+            }, 3000);
+            $timeout(function () {
+                return status = "ready";
+            }, 6000);
+        };
+
+        var readURL = function readURL(input) {
+            if (input.files && input.files[0]) {
+                console.log('hello1');
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    console.log('hello2');
+                    image = e.target.result;
+                    simulate();
+                    $scope.$apply();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        var init = function init() {
+            events();
+        };
+
+        init();
+
+        _.extend(this, {
+            getFormData: function getFormData() {
+                return JSON.stringify({ "lastName": "Nelson", "collectionDate": "29/04/2016", "undefined": "34078934164" });
+            },
+            getImage: function getImage() {
+                return image;
+            },
+            isStatus: function isStatus(string) {
+                return status == string;
+            }
+        });
+    }
+});
+
+app.component('splashItem', {
+    templateUrl: 'splash.html',
+    controllerAs: 'splash',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {});
+    }
+});
+
 app.component('tableItem', { templateUrl: 'table.html' });
 
 app.component('tableRow', { templateUrl: 'table-row.html' });
@@ -398,23 +510,6 @@ app.component('tableContents', {
     }
 });
 
-app.component('heroItem', {
-    templateUrl: 'hero.html',
-    controllerAs: 'hero',
-    bindings: {
-        img: '@',
-        heading: '@'
-    },
-    controller: function controller($element, $timeout) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {});
-    }
-});
-
 app.controller('AboutScreen', function ($element, $timeout, $scope) {
 
     var init = function init() {
@@ -426,9 +521,11 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
     _.extend($scope, {});
 });
 
-app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('FormScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
-    var init = function init() {};
+    var init = function init() {
+        Form.loadFormData();
+    };
 
     init();
 
@@ -439,4 +536,22 @@ app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams,
         genPdf: Form.genPdf,
         genPdfUrl: Form.genPdfUrl
     });
+});
+
+app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
+
+    init();
+
+    _.extend($scope, {});
+});
+
+app.controller('ScanScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
+
+    init();
+
+    _.extend($scope, {});
 });

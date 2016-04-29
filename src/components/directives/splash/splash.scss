@@ -1,0 +1,61 @@
+splash-item {
+  .splash {
+    margin-top: -50px;
+    height: calc(100vh);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    background: darken($primary, 15%);
+    position: relative;
+
+    //background: #1e5799;
+    //background: -moz-radial-gradient(center, ellipse cover,  #1e5799 0%, #7db9e8 100%);
+    //background: -webkit-radial-gradient(center, ellipse cover,  #1e5799 0%,#7db9e8 100%);
+    background: radial-gradient(ellipse at center,  darken($primary, 15%) 10%,darken($primary, 30%) 90%);
+    //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 );
+
+
+    .splash-header {
+      color: white;
+      font-weight: 100;
+      font-size: 50px;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .splash-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+
+      .butn {
+        margin: 0;
+        &:first-child {
+          margin-right: 50px;
+        }
+      }
+    }
+
+    .splash-box {
+      //background: rgba(0,0,0, 0.1);
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      padding: 50px;
+      width: 500px;
+      max-width: calc(100vw - 100px);
+      //min-height: 500px;
+      //border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 3px;
+      //box-shadow: 0 0 5px rgba(0,0,0,0.15);
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+     
+    }
+  }
+}

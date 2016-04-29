@@ -1,0 +1,22 @@
+<script type="text/ng-template" id="scan.html">
+    <div class="scan">
+        <div ng-show="scan.isStatus('empty')">
+            <div class="scan-header">Select Image</div>
+            <label for="scan-file" class="butn">Select Image</label>
+            <input id="scan-file" class="hide" type="file" custom-on-change="verify.changeProfile" accept="image/*">
+
+        </div>
+        <div ng-show="scan.isStatus('selected')">
+            <div class="scan-header"><span>Reading Image &nbsp; <i class="fa fa-spin fa-cog"></i></span></div>
+        </div>
+        <div ng-show="scan.isStatus('populating')">
+            <div class="scan-header"><span>Populating Form &nbsp; <i class="fa fa-spin fa-cog"></i></span></div>
+        </div>
+        <div ng-show="scan.isStatus('ready')">
+            <div class="scan-header"><span>Ready &nbsp; <i class="fa fa-check"></i></span></div>
+            <div class="butn" ui-sref="form({formData:scan.getFormData()})">View Form</div>
+        </div>
+
+        <img id="blah" ng-if="scan.getImage()" src="{{scan.getImage()}}" class="scan-img"/>
+    </div>
+</script>
