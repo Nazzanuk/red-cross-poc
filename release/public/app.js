@@ -303,7 +303,8 @@ app.component('canvasItem', {
         var init = function init() {
             $canvas = $element.find('canvas');
             ctx = $canvas[0].getContext("2d");
-            $canvas[0].width = 300;
+            console.log($canvas.closest('.flex-content').width());
+            $canvas[0].width = $canvas.closest('.flex-content').width();
             $canvas[0].height = 300;
 
             events();

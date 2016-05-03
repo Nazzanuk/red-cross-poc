@@ -44,7 +44,7 @@
             <canvas id="canvas"></canvas>
 
         <div>
-            <div class="butn hidden-print" ng-click="canvas.clear()">Clear</div>
+            <div class="butn hidden-print" ng-click="canvas.clear()">Clear &nbsp; <i class="fa fa-times"></i></div>
 
         </div>
 
@@ -169,7 +169,7 @@
         <content-item>
             <content>
 
-                <a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print pull-right">Save as PDF</a>
+                <!--<a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print pull-right">Save as PDF</a>-->
                 <!--<a ng-href="{{genPdfUrl()}}" target="_blank" class="butn hidden-print pull-right" style="margin-right: 10px;">Scan Document</a>-->
 
                 <p>
@@ -220,12 +220,24 @@
                         <table-field label="Additive" id="Additive"></table-field>
                     </table-row>
 
+                    <table-header label="3. Terms and conditions"></table-header>
                     <table-row>
-                        <div class="flex-field">
-                            <div class="flex-label">Signature</div>
-                            <div class="flex-content">
+                        <div class="flex-field sign-field">
+                            <div class="flex-label sign-label">By signing this document you accept the following Terms and Conditions.</div>
+                            <div class="flex-content sign-content">
+                                <div class="butn" style="margin-right: 10px;">Terms & Conditions</div>
+                                <div class="butn">Privacy Agreement</div>
+                            </div>
+                        </div>
+                    </table-row>
+
+                    <table-header label="3. Signature"></table-header>
+                    <table-row>
+                        <div class="flex-field sign-field">
+                            <div class="flex-label sign-label">Sign below</div>
+                            <div class="flex-content sign-content">
                                 <canvas-item class="hidden-print"></canvas-item>
-                                <img class="visible-print" src="public/img/{{getFormData().savedImage}}" alt="">
+                                <img class="visible-print" style="height: 300px;" src="public/img/{{getFormData().savedImage}}" alt="">
                             </div>
                         </div>
 
@@ -235,7 +247,7 @@
 
                 <p>&nbsp;</p>
 
-                <div ng-click="genPdf()" target="_blank" class="butn hidden-print">Save as PDF</div>
+                <div ng-click="genPdf()" target="_blank" class="butn hidden-print">Submit &nbsp; <i class="fa fa-check"></i></div>
 
             </content>
         </content-item>

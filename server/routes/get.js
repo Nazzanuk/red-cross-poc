@@ -39,7 +39,7 @@ module.exports = {
                         OCD.upload(`../release/public/pdf/form-${now}.pdf`, `form-${now}.pdf`);
                         phInstance.exit();
                     });
-                }, 1000);
+                }, 1500);
             });
 
     },

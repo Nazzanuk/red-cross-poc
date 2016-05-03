@@ -63,6 +63,29 @@ a {
     .butn:hover.white {
       color: #212121; }
 
+.sign-field {
+  -webkit-flex-wrap: wrap !important;
+      -ms-flex-wrap: wrap !important;
+          flex-wrap: wrap !important; }
+
+.sign-label {
+  -webkit-flex: 1 0 100% !important;
+      -ms-flex: 1 0 100% !important;
+          flex: 1 0 100% !important;
+  text-align: center !important;
+  -webkit-justify-content: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important; }
+
+.sign-content {
+  -webkit-flex: 1 0 100% !important;
+      -ms-flex: 1 0 100% !important;
+          flex: 1 0 100% !important;
+  text-align: center !important;
+  -webkit-justify-content: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important; }
+
 .flex-table {
   display: -webkit-flex;
   display: -ms-flexbox;
