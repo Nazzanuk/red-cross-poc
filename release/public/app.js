@@ -248,6 +248,25 @@ app.service('Scan', function ($state, $stateParams, $timeout, $http) {
     return {};
 });
 
+app.component('confirmItem', {
+    templateUrl: 'confirm.html',
+    controllerAs: 'confirm',
+    bindings: {},
+    controller: function controller($element, $timeout, $scope, Form) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            isStatus: function isStatus(string) {
+                return string == Form.getStatus();
+            },
+            getFormUrl: Form.getFormUrl
+        });
+    }
+});
+
 app.component('canvasItem', {
     templateUrl: 'canvas.html',
     controllerAs: 'canvas',
@@ -419,25 +438,6 @@ app.component('contentItem', {
     }
 });
 
-app.component('confirmItem', {
-    templateUrl: 'confirm.html',
-    controllerAs: 'confirm',
-    bindings: {},
-    controller: function controller($element, $timeout, $scope, Form) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {
-            isStatus: function isStatus(string) {
-                return string == Form.getStatus();
-            },
-            getFormUrl: Form.getFormUrl
-        });
-    }
-});
-
 app.component('formListItem', {
     templateUrl: 'form-list.html',
     controllerAs: 'formList',
@@ -467,23 +467,6 @@ app.component('formListItem', {
     }
 });
 
-app.component('heroItem', {
-    templateUrl: 'hero.html',
-    controllerAs: 'hero',
-    bindings: {
-        img: '@',
-        heading: '@'
-    },
-    controller: function controller($element, $timeout) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {});
-    }
-});
-
 app.component('headerItem', {
     templateUrl: 'header.html',
     controllerAs: 'header',
@@ -501,6 +484,23 @@ app.component('headerItem', {
             setPage: Menu.setPage,
             isCurrentPage: Menu.isCurrentPage
         });
+    }
+});
+
+app.component('heroItem', {
+    templateUrl: 'hero.html',
+    controllerAs: 'hero',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {});
     }
 });
 
@@ -656,15 +656,6 @@ app.controller('ConfirmScreen', function ($element, $timeout, $state, $statePara
     _.extend($scope, {});
 });
 
-app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
-
-    var init = function init() {};
-
-    init();
-
-    _.extend($scope, {});
-});
-
 app.controller('FormScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {
@@ -682,7 +673,7 @@ app.controller('FormScreen', function ($element, $timeout, $state, $stateParams,
     });
 });
 
-app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {};
 
@@ -692,6 +683,15 @@ app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams,
 });
 
 app.controller('ScanScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
+
+    init();
+
+    _.extend($scope, {});
+});
+
+app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {};
 

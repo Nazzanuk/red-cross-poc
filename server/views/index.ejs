@@ -36,6 +36,22 @@
 
 
 
+<script type="text/ng-template" id="confirm.html">
+    <div class="confirm">
+        <div ng-show="confirm.isStatus('sending')">
+            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
+        </div>
+        <div ng-show="confirm.isStatus('complete')">
+            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
+            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
+            <div class="butn white" ui-sref="dashboard">Dashboard</div>
+            <a class="butn white"
+               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
+               target="_blank"
+            >Oracle Documents Cloud</a>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="canvas.html">
     <div class="canvas">
         <!--<div class="container">-->
@@ -58,22 +74,6 @@
     <div class="content" id="print_me">
         <div class="container-fluid">
             <div ng-transclude="content"></div>
-        </div>
-    </div>
-</script>
-<script type="text/ng-template" id="confirm.html">
-    <div class="confirm">
-        <div ng-show="confirm.isStatus('sending')">
-            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
-        </div>
-        <div ng-show="confirm.isStatus('complete')">
-            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
-            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
-            <div class="butn white" ui-sref="dashboard">Dashboard</div>
-            <a class="butn white"
-               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
-               target="_blank"
-            >Oracle Documents Cloud</a>
         </div>
     </div>
 </script>
@@ -117,15 +117,6 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="hero.html">
-    <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
-            <div class="banner-overlay">
-                {{hero.heading}}
-            </div>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container-fluid">
@@ -141,6 +132,15 @@
         </div>
 
 
+    </div>
+</script>
+<script type="text/ng-template" id="hero.html">
+    <div class="hero">
+        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+            <div class="banner-overlay">
+                {{hero.heading}}
+            </div>
+        </div>
     </div>
 </script>
 <script type="text/ng-template" id="scan.html">
@@ -227,16 +227,6 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="dashboard-screen.html">
-    <div screen="dashboard">
-
-        <form-list-item>
-
-        </form-list-item>
-
-
-    </div>
-</script>
 <script type="text/ng-template" id="form-screen.html">
     <div screen="form">
 
@@ -299,7 +289,7 @@
                     </table-row>
 
                     <table-header label="Terms and conditions" class="hidden-print"></table-header>
-                    <table-row>
+                    <table-row class="hidden-print">
                         <div class="flex-field sign-field">
                             <div class="flex-label sign-label">By signing this document you accept the following Terms and Conditions.</div>
                             <div class="flex-content sign-content">
@@ -332,9 +322,12 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="home-screen.html">
-    <div screen="home">
-        <splash-item></splash-item>
+<script type="text/ng-template" id="dashboard-screen.html">
+    <div screen="dashboard">
+
+        <form-list-item>
+
+        </form-list-item>
 
 
     </div>
@@ -343,6 +336,13 @@
     <div screen="scan">
 
         <scan-item></scan-item>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="home-screen.html">
+    <div screen="home">
+        <splash-item></splash-item>
 
 
     </div>
