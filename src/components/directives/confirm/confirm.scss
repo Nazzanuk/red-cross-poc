@@ -1,0 +1,43 @@
+confirm-item {
+  .confirm {
+    ////margin-top: -50px;
+    //height: calc(100vh - 50px);
+    margin-top: -50px;
+    height: calc(100vh);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    //background: darken($primary, 15%);
+    position: relative;
+    flex-direction: column;
+    background: radial-gradient(ellipse at center,  darken(white, 0%) 40%,darken(white, 10%) 90%);
+    text-align: center;
+    background: radial-gradient(ellipse at center,  darken($primary, 15%) 10%,darken($primary, 30%) 90%);
+
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .confirm-header {
+      color: white;
+      font-weight: 100;
+      font-size: 50px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .confirm-img {
+      max-width: calc(100% - 60px);
+      width: 500px;
+      margin-top: 30px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.15);
+    }
+
+
+  }
+}

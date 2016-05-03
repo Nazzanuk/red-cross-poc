@@ -33,7 +33,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/");
 
     // Now set up the states
-    $stateProvider.state(new Route('home', "/", resolve)).state(new Route('form', "/form/?formData", resolve)).state(new Route('about', "/about", resolve)).state(new Route('scan', "/scan", resolve));
+    $stateProvider.state(new Route('home', "/", resolve)).state(new Route('form', "/form/?formData", resolve)).state(new Route('about', "/about", resolve)).state(new Route('scan', "/scan", resolve)).state(new Route('confirm', "/confirm", resolve));
 
     //use real urls instead of hashes
     //$locationProvider.html5Mode(true);
@@ -85,15 +85,33 @@ app.service('Canvas', function ($state, $stateParams, $timeout) {
 app.service('Form', function ($state, $stateParams, $timeout, $http) {
 
     var formData = {},
-        $canvas;
+        $canvas,
+        status = 'none',
+        formUrl = "";
 
     var genPdf = function genPdf() {
         if ($canvas) saveImg($canvas);
+        $timeout(function () {
+            return $state.go('confirm');
+        }, 100);
+        return genForm();
+    };
+
+    var openPdf = function openPdf() {
         window.open(genPdfUrl(), "PDF");
     };
 
     var genPdfUrl = function genPdfUrl() {
         return '/print/?formData=' + JSON.stringify(formData);
+    };
+
+    var genForm = function genForm() {
+        status = 'sending';
+        return $http.get('/print/?formData=' + JSON.stringify(formData)).then(function (response) {
+            status = 'complete';
+            console.log('complete', response.data.formUrl);
+            formUrl = response.data.formUrl;
+        });
     };
 
     var saveImg = function saveImg($canvas) {
@@ -130,7 +148,15 @@ app.service('Form', function ($state, $stateParams, $timeout, $http) {
     init();
 
     return {
+        getFormUrl: function getFormUrl() {
+            return formUrl;
+        },
+        getStatus: function getStatus() {
+            return status;
+        },
         loadFormData: loadFormData,
+        genForm: genForm,
+        openPdf: openPdf,
         getFormData: function getFormData() {
             return formData;
         },
@@ -315,6 +341,25 @@ app.component('canvasItem', {
         _.extend(this, {
             genPdf: genPdf,
             clear: clear
+        });
+    }
+});
+
+app.component('confirmItem', {
+    templateUrl: 'confirm.html',
+    controllerAs: 'confirm',
+    bindings: {},
+    controller: function controller($element, $timeout, $scope, Form) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            isStatus: function isStatus(string) {
+                return string == Form.getStatus();
+            },
+            getFormUrl: Form.getFormUrl
         });
     }
 });
@@ -516,6 +561,15 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
     var init = function init() {
         //$timeout(() => $element.find('[screen]').addClass('active'), 50);
     };
+
+    init();
+
+    _.extend($scope, {});
+});
+
+app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
 
     init();
 

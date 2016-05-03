@@ -1,0 +1,11 @@
+<script type="text/ng-template" id="confirm.html">
+    <div class="confirm">
+        <div ng-show="confirm.isStatus('sending')">
+            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
+        </div>
+        <div ng-show="confirm.isStatus('complete')">
+            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
+            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
+        </div>
+    </div>
+</script>

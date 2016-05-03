@@ -35,7 +35,8 @@ module.exports = {
                     sitepage.render(`../release/public/pdf/form-${now}.pdf`).then(() => {
                         console.log('Rendered Page - ' + `../release/public/pdf/form-${now}.pdf`);
                         //res.download('../release/public/pdf/pdf.pdf'); // Set disposition and send it.
-                        res.redirect(`/public/pdf/form-${now}.pdf`);
+                        //res.redirect(`/public/pdf/form-${now}.pdf`);
+                        res.send({formUrl:`/public/pdf/form-${now}.pdf`});
                         OCD.upload(`../release/public/pdf/form-${now}.pdf`, `form-${now}.pdf`);
                         phInstance.exit();
                     });

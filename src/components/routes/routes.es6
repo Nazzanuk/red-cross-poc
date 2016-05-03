@@ -17,7 +17,8 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
         .state(new Route('home', "/", resolve))
         .state(new Route('form', "/form/?formData", resolve))
         .state(new Route('about', "/about", resolve))
-        .state(new Route('scan', "/scan", resolve));
+        .state(new Route('scan', "/scan", resolve))
+        .state(new Route('confirm', "/confirm", resolve));
 
     //use real urls instead of hashes
     //$locationProvider.html5Mode(true);

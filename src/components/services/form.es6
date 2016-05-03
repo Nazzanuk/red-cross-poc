@@ -1,18 +1,32 @@
 app.service('Form', ($state, $stateParams, $timeout, $http) => {
 
-    var formData = {}, $canvas;
+    var formData = {}, $canvas, status = 'none', formUrl = "";
 
     var genPdf = () => {
         if ($canvas) saveImg($canvas);
+        $timeout(() => $state.go('confirm'),100);
+        return genForm();
+    };
+
+    var openPdf = () => {
         window.open(genPdfUrl(), "PDF");
     };
 
     var genPdfUrl = () => '/print/?formData=' + JSON.stringify(formData);
 
+    var genForm = () => {
+        status = 'sending';
+        return $http.get(`/print/?formData=${JSON.stringify(formData)}`).then((response) => {
+            status = 'complete';
+            console.log('complete', response.data.formUrl);
+            formUrl = response.data.formUrl;
+        });
+    };
+
     var saveImg = ($canvas) => {
         var img = $canvas[0].toDataURL("image/png");
 
-        return $http.post('/image', {file: img, code:formData.signatureCode}).then((data) => {
+        return $http.post('/image', {file: img, code: formData.signatureCode}).then((data) => {
             console.log(data);
         });
     };
@@ -30,7 +44,7 @@ app.service('Form', ($state, $stateParams, $timeout, $http) => {
     var loadFormData = () => {
         formData = $stateParams.formData ? JSON.parse($stateParams.formData) : formData;
 
-    }
+    };
 
     var init = () => {
         events();
@@ -42,7 +56,11 @@ app.service('Form', ($state, $stateParams, $timeout, $http) => {
     init();
 
     return {
+        getFormUrl: () => formUrl,
+        getStatus: () => status,
         loadFormData,
+        genForm,
+        openPdf,
         getFormData: () => formData,
         updateParams,
         setCanvas: canvas => $canvas = canvas,

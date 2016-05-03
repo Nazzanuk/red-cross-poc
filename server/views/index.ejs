@@ -54,6 +54,17 @@
 
 
 
+<script type="text/ng-template" id="confirm.html">
+    <div class="confirm">
+        <div ng-show="confirm.isStatus('sending')">
+            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
+        </div>
+        <div ng-show="confirm.isStatus('complete')">
+            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
+            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="content.html">
     <div class="content" id="print_me">
         <div class="container-fluid">
@@ -163,6 +174,14 @@
         ></hero-item>
     </div>
 </script>
+<script type="text/ng-template" id="confirm-screen.html">
+    <div screen="confirm">
+
+        <confirm-item></confirm-item>
+
+
+    </div>
+</script>
 <script type="text/ng-template" id="form-screen.html">
     <div screen="form">
 
@@ -247,7 +266,7 @@
 
                 <p>&nbsp;</p>
 
-                <div ng-click="genPdf()" target="_blank" class="butn hidden-print">Submit &nbsp; <i class="fa fa-check"></i></div>
+                <div ng-click="genPdf()" class="butn hidden-print">Submit &nbsp; <i class="fa fa-check"></i></div>
 
             </content>
         </content-item>

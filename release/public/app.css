@@ -219,6 +219,48 @@ canvas-item .canvas canvas {
   cursor: crosshair;
   cursor: url("icons/pen-32.png") 0 32, auto; }
 
+confirm-item .confirm {
+  margin-top: -50px;
+  height: calc(100vh);
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: radial-gradient(ellipse at center, white 40%, #e6e6e6 90%);
+  text-align: center;
+  background: radial-gradient(ellipse at center, #ae0e1c 10%, #670811 90%); }
+  confirm-item .confirm div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+  confirm-item .confirm .confirm-header {
+    color: white;
+    font-weight: 100;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px; }
+  confirm-item .confirm .confirm-img {
+    max-width: calc(100% - 60px);
+    width: 500px;
+    margin-top: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); }
+
 content-item .content {
   font-size: 14px;
   font-weight: 500;
