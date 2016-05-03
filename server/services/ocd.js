@@ -9,6 +9,7 @@ var user = "odcs.dev1@vassit.co.uk", pass = "Vassit1234",
 module.exports = {
     upload: (fileLocation, fileName) => {
         console.log('OCD.uploading', fileLocation);
+        module.exports.updateMeta(fileLocation);
 
         let obj = {method: 'POST', url, auth: {user, pass}};
 
@@ -25,5 +26,9 @@ module.exports = {
             filename: fileName,
             contentType: 'application/pdf'
         });
+    },
+
+    updateMeta: (fileLocation) => {
+        console.log('OCD.updateMeta', fileLocation);
     }
 };

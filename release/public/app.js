@@ -576,6 +576,15 @@ app.controller('ConfirmScreen', function ($element, $timeout, $state, $statePara
     _.extend($scope, {});
 });
 
+app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
+
+    init();
+
+    _.extend($scope, {});
+});
+
 app.controller('FormScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {
@@ -591,15 +600,6 @@ app.controller('FormScreen', function ($element, $timeout, $state, $stateParams,
         genPdf: Form.genPdf,
         genPdfUrl: Form.genPdfUrl
     });
-});
-
-app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
-
-    var init = function init() {};
-
-    init();
-
-    _.extend($scope, {});
 });
 
 app.controller('ScanScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
