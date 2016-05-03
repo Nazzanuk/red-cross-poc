@@ -1,10 +1,15 @@
-app.service('Form', ($state, $stateParams, $timeout, $http) => {
+app.service('Form', ($state, $stateParams, $timeout, $http, DB) => {
 
-    var formData = {}, $canvas, status = 'none', formUrl = "";
+    var formData = {
+        "firstName": "",
+        "lastName": "",
+        "gender": _.sample(['M', 'F']),
+        "date": moment().format("DD MMM YYYY")
+    }, $canvas, status = 'none', formUrl = "";
 
     var genPdf = () => {
         if ($canvas) saveImg($canvas);
-        $timeout(() => $state.go('confirm'),100);
+        $timeout(() => $state.go('confirm'),500);
         return genForm();
     };
 
@@ -20,6 +25,10 @@ app.service('Form', ($state, $stateParams, $timeout, $http) => {
             status = 'complete';
             console.log('complete', response.data.formUrl);
             formUrl = response.data.formUrl;
+
+            var clone = _.clone(formData);
+            clone.formUrl = formUrl;
+            DB.insert('forms', clone);
         });
     };
 

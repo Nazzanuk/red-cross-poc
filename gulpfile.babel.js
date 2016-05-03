@@ -79,6 +79,7 @@ gulp.task('gen-lib-js', () =>
     gulp.src([
             'src/bower-components/jquery/dist/jquery.min.js',
             'src/bower-components/angular/angular.min.js',
+            'src/bower-components/moment/min/moment.min.js',
             'src/bower-components/angular-ui-router/release/angular-ui-router.min.js',
             'src/bower-components/lodash/dist/lodash.min.js'
         ])

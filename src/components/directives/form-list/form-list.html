@@ -1,0 +1,40 @@
+<script type="text/ng-template" id="form-list.html">
+    <div class="form-list">
+
+        <div class="container">
+            <h1>Forms</h1>
+
+            <table-item>
+                <table-row>
+                    <div class="flex-field" ng-init="formList.search = {}">
+                        <div class="flex-label ng-binding">Search By Name</div>
+                        <div class="flex-input"><input placeholder="-" ng-model="formList.search.$"></div>
+                    </div>
+                </table-row>
+                <table-row>
+                    <div class="flex-field">
+                        <div class="flex-label ng-binding">Search Gender</div>
+                        <div class="flex-input"><input placeholder="-" ng-model="formList.search.gender"></div>
+                    </div>
+                </table-row>
+
+                <table-header label="Donor Details"></table-header>
+                <table-row>
+                    <div class="flex-label" style="justify-content: center">Name</div>
+                    <div class="flex-label" style="justify-content: center">Gender</div>
+                    <div class="flex-label" style="justify-content: center">Form Link</div>
+                </table-row>
+                <table-row ng-repeat="form in formList.getForms() | filter:formList.search">
+                    <div class="flex-content" style="justify-content: center">{{form.firstName}} {{form.lastName}}</div>
+                    <div class="flex-content" style="justify-content: center">{{form.gender}}</div>
+                    <div class="flex-content" style="justify-content: center">
+                        <a class="butn" href="{{form.formUrl}}" target="_blank">Open Form &nbsp;
+                            <i class="fa fa-chevron-right"></i></a>
+                    </div>
+
+                </table-row>
+            </table-item>
+        </div>
+
+    </div>
+</script>

@@ -3,8 +3,14 @@
 var phantom = require('phantom');
 var fs = require("fs");
 var OCD = require("../services/ocd");
+var Nedb = require('./../services/nedb');
 
 module.exports = {
+    dbCollection(req, res) {
+        console.log('getCollection', req.params);
+        Nedb.find(res, req.params.collection);
+    },
+
     print(req, res) {
         var url = req.headers.referer, now = Date.now(), ratio = 0.7, formData = JSON.parse(req.query.formData);
         var imageFileName = `signature-${formData.signatureCode}.png`;

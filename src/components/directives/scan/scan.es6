@@ -7,7 +7,7 @@ app.component('scanItem', {
     },
     controller: function ($element, $timeout, $scope) {
 
-        var image = "", status = "empty";
+        var image = "", status = "empty", formData;
 
         var events = () => {
             $($element).find('#scan-file').change(function () {
@@ -39,14 +39,29 @@ app.component('scanItem', {
             }
         };
 
+        var genFormData = () => {
+            formData = {
+                "firstName": _.sample(['Alex', 'Braidy', 'Kasey', 'Robin', 'Merle', 'Charley', 'Raine', 'Cary', 'Billy']),
+                "lastName": _.sample(['Sinders', 'Jackson', 'Nelson', 'Osman', 'Mendez', 'Beckham', 'Morris', 'Ianson', 'Fishman', `Stoddard`, 'Cokes', 'Jolie', 'Smith']),
+                "gender": _.sample(['M', 'F']),
+                "date": moment().format("DD MMM YYYY"),
+                "collectionDate": moment().add(_.random(0,50), ' days').format("DD MMM YYYY")
+            };
+        };
+
+        var getFormData = () => {
+            return JSON.stringify(formData);
+        };
+
         var init = () => {
+            genFormData();
             events();
         };
 
         init();
 
         _.extend(this, {
-            getFormData: () => JSON.stringify({"lastName":"Nelson","collectionDate":"29/04/2016","undefined":"34078934164"}),
+            getFormData,
             getImage: () => image,
             isStatus: (string) => status == string
         });

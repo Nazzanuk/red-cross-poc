@@ -17,6 +17,7 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
         .state(new Route('home', "/", resolve))
         .state(new Route('form', "/form/?formData", resolve))
         .state(new Route('about', "/about", resolve))
+        .state(new Route('dashboard', "/dashboard", resolve))
         .state(new Route('scan', "/scan", resolve))
         .state(new Route('confirm', "/confirm", resolve));
 
