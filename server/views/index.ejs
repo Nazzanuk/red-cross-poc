@@ -36,22 +36,6 @@
 
 
 
-<script type="text/ng-template" id="confirm.html">
-    <div class="confirm">
-        <div ng-show="confirm.isStatus('sending')">
-            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
-        </div>
-        <div ng-show="confirm.isStatus('complete')">
-            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
-            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
-            <div class="butn white" ui-sref="dashboard">Dashboard</div>
-            <a class="butn white"
-               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
-               target="_blank"
-            >Oracle Documents Cloud</a>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="canvas.html">
     <div class="canvas">
         <!--<div class="container">-->
@@ -77,42 +61,64 @@
         </div>
     </div>
 </script>
+<script type="text/ng-template" id="confirm.html">
+    <div class="confirm">
+        <div ng-show="confirm.isStatus('sending')">
+            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
+        </div>
+        <div ng-show="confirm.isStatus('complete')">
+            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
+            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
+            <div class="butn white" ui-sref="dashboard">Dashboard</div>
+            <a class="butn white"
+               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
+               target="_blank"
+            >Oracle Documents Cloud</a>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="form-list.html">
     <div class="form-list">
 
         <div class="container">
-            <h1>Forms</h1>
+            <content-item>
+                <content>
+                    <div class="butn pull-right">Export to XLS</div>
+                    <div class="butn pull-right" style="margin-right: 10px">Export to PDF</div>
+                    <h1>Forms</h1>
 
-            <table-item>
-                <table-row>
-                    <div class="flex-field" ng-init="formList.search = {}">
-                        <div class="flex-label ng-binding">Search By Name</div>
-                        <div class="flex-input"><input placeholder="-" ng-model="formList.search.$"></div>
-                    </div>
-                </table-row>
-                <table-row>
-                    <div class="flex-field">
-                        <div class="flex-label ng-binding">Search Gender</div>
-                        <div class="flex-input"><input placeholder="-" ng-model="formList.search.gender"></div>
-                    </div>
-                </table-row>
+                    <table-item>
+                        <table-row>
+                            <div class="flex-field" ng-init="formList.search = {}">
+                                <div class="flex-label ng-binding">Search By Name</div>
+                                <div class="flex-input"><input placeholder="-" ng-model="formList.search.$"></div>
+                            </div>
+                        </table-row>
+                        <table-row>
+                            <div class="flex-field">
+                                <div class="flex-label ng-binding">Search Gender</div>
+                                <div class="flex-input"><input placeholder="-" ng-model="formList.search.gender"></div>
+                            </div>
+                        </table-row>
 
-                <table-header label="Donor Details"></table-header>
-                <table-row>
-                    <div class="flex-label" style="justify-content: center">Name</div>
-                    <div class="flex-label" style="justify-content: center">Gender</div>
-                    <div class="flex-label" style="justify-content: center">Form Link</div>
-                </table-row>
-                <table-row ng-repeat="form in formList.getForms() | filter:formList.search">
-                    <div class="flex-content" style="justify-content: center">{{form.firstName}} {{form.lastName}}</div>
-                    <div class="flex-content" style="justify-content: center">{{form.gender}}</div>
-                    <div class="flex-content" style="justify-content: center">
-                        <a class="butn" href="{{form.formUrl}}" target="_blank">Open Form &nbsp;
-                            <i class="fa fa-chevron-right"></i></a>
-                    </div>
+                        <table-header label="Donor Details"></table-header>
+                        <table-row>
+                            <div class="flex-label" style="justify-content: center">Name</div>
+                            <div class="flex-label" style="justify-content: center">Gender</div>
+                            <div class="flex-label" style="justify-content: center">Form Link</div>
+                        </table-row>
+                        <table-row ng-repeat="form in formList.getForms() | filter:formList.search">
+                            <div class="flex-content" style="justify-content: center">{{form.firstName}} {{form.lastName}}</div>
+                            <div class="flex-content" style="justify-content: center">{{form.gender}}</div>
+                            <div class="flex-content" style="justify-content: center">
+                                <a class="butn" href="{{form.formUrl}}" target="_blank">Open Form &nbsp;
+                                    <i class="fa fa-angle-right"></i></a>
+                            </div>
 
-                </table-row>
-            </table-item>
+                        </table-row>
+                    </table-item>
+                </content>
+            </content-item>
         </div>
 
     </div>
@@ -227,6 +233,16 @@
 
     </div>
 </script>
+<script type="text/ng-template" id="dashboard-screen.html">
+    <div screen="dashboard">
+
+        <form-list-item>
+
+        </form-list-item>
+
+
+    </div>
+</script>
 <script type="text/ng-template" id="form-screen.html">
     <div screen="form">
 
@@ -322,12 +338,9 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="dashboard-screen.html">
-    <div screen="dashboard">
-
-        <form-list-item>
-
-        </form-list-item>
+<script type="text/ng-template" id="home-screen.html">
+    <div screen="home">
+        <splash-item></splash-item>
 
 
     </div>
@@ -336,13 +349,6 @@
     <div screen="scan">
 
         <scan-item></scan-item>
-
-
-    </div>
-</script>
-<script type="text/ng-template" id="home-screen.html">
-    <div screen="home">
-        <splash-item></splash-item>
 
 
     </div>
