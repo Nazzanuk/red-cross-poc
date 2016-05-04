@@ -1,7 +1,21 @@
 form-list-item {
   .form-list {
 
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none;
+      border: none;
+      outline: none;
+      box-shadow: none;
 
+      justify-content: center;
+    }
+
+    .flex-label, .flex-content {
+      flex:1 !important;
+    }
 
   }
 }

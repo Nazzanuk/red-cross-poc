@@ -382,6 +382,25 @@ app.component('canvasItem', {
     }
 });
 
+app.component('confirmItem', {
+    templateUrl: 'confirm.html',
+    controllerAs: 'confirm',
+    bindings: {},
+    controller: function controller($element, $timeout, $scope, Form) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            isStatus: function isStatus(string) {
+                return string == Form.getStatus();
+            },
+            getFormUrl: Form.getFormUrl
+        });
+    }
+});
+
 app.component('contentItem', {
     templateUrl: 'content.html',
     controllerAs: 'content',
@@ -419,22 +438,40 @@ app.component('contentItem', {
     }
 });
 
-app.component('confirmItem', {
-    templateUrl: 'confirm.html',
-    controllerAs: 'confirm',
-    bindings: {},
-    controller: function controller($element, $timeout, $scope, Form) {
+app.component('headerItem', {
+    templateUrl: 'header.html',
+    controllerAs: 'header',
+    bindings: {
+        img: '@'
+    },
+    controller: function controller(Menu) {
 
         var init = function init() {};
 
         init();
 
         _.extend(this, {
-            isStatus: function isStatus(string) {
-                return string == Form.getStatus();
-            },
-            getFormUrl: Form.getFormUrl
+            getPages: Menu.getPages,
+            setPage: Menu.setPage,
+            isCurrentPage: Menu.isCurrentPage
         });
+    }
+});
+
+app.component('heroItem', {
+    templateUrl: 'hero.html',
+    controllerAs: 'hero',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {});
     }
 });
 
@@ -467,29 +504,9 @@ app.component('formListItem', {
     }
 });
 
-app.component('headerItem', {
-    templateUrl: 'header.html',
-    controllerAs: 'header',
-    bindings: {
-        img: '@'
-    },
-    controller: function controller(Menu) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {
-            getPages: Menu.getPages,
-            setPage: Menu.setPage,
-            isCurrentPage: Menu.isCurrentPage
-        });
-    }
-});
-
-app.component('heroItem', {
-    templateUrl: 'hero.html',
-    controllerAs: 'hero',
+app.component('splashItem', {
+    templateUrl: 'splash.html',
+    controllerAs: 'splash',
     bindings: {
         img: '@',
         heading: '@'
@@ -552,11 +569,16 @@ app.component('scanItem', {
         var genFormData = function genFormData() {
             formData = {
                 "firstName": _.sample(['Alex', 'Braidy', 'Kasey', 'Robin', 'Merle', 'Charley', 'Raine', 'Cary', 'Billy']),
-                "lastName": _.sample(['Sinders', 'Jackson', 'Nelson', 'Osman', 'Mendez', 'Beckham', 'Morris', 'Ianson', 'Fishman', 'Stoddard', 'Cokes', 'Jolie', 'Smith']),
+                "lastName": _.sample(['Sinders', 'Varas', 'Isidoro', 'Smith', 'Connelly', 'Martins', 'Stuart', 'Jackson', 'Nelson', 'Osman', 'Mendez', 'Beckham', 'Morris', 'Ianson', 'Fishman', 'Stoddard', 'Cokes', 'Jolie', 'Smith']),
                 "gender": _.sample(['M', 'F']),
+                "age": _.random(18, 55),
+                "nationality": _.sample(['British', 'French', 'American', 'Spanish', 'Mexican', 'German', 'Irish', 'Scottish', 'Portuguese']),
                 "date": moment().format("DD MMM YYYY"),
+                "time": moment().format("YYYYMMDD-hh:mm"),
                 "collectionDate": moment().add(_.random(0, 50), ' days').format("DD MMM YYYY")
             };
+
+            formData.email = formData.firstName.toLowerCase() + "." + formData.lastName.toLowerCase() + "@" + _.sample(['gmail', 'hotmail', 'yahoo', 'me']) + _.sample(['.com', '.net', '.co.uk', '.org']);
         };
 
         var getFormData = function getFormData() {
@@ -579,23 +601,6 @@ app.component('scanItem', {
                 return status == string;
             }
         });
-    }
-});
-
-app.component('splashItem', {
-    templateUrl: 'splash.html',
-    controllerAs: 'splash',
-    bindings: {
-        img: '@',
-        heading: '@'
-    },
-    controller: function controller($element, $timeout) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {});
     }
 });
 
