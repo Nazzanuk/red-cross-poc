@@ -54,22 +54,6 @@
 
 
 
-<script type="text/ng-template" id="confirm.html">
-    <div class="confirm">
-        <div ng-show="confirm.isStatus('sending')">
-            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
-        </div>
-        <div ng-show="confirm.isStatus('complete')">
-            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
-            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
-            <div class="butn white" ui-sref="dashboard">Dashboard</div>
-            <a class="butn white"
-               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
-               target="_blank"
-            >Oracle Documents Cloud</a>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="content.html">
     <div class="content" id="print_me">
         <div class="container-fluid">
@@ -134,7 +118,7 @@
                                     <option value="time">Submitted</option>
                                     <option value="firstName">Name</option>
                                     <option value="age">Age</option>
-                                    <option value="gender">Gander</option>
+                                    <option value="gender">Gender</option>
                                     <option value="nationality">Nationality</option>
                                 </select>
                             </div>
@@ -170,6 +154,31 @@
 
     </div>
 </script>
+<script type="text/ng-template" id="confirm.html">
+    <div class="confirm">
+        <div ng-show="confirm.isStatus('sending')">
+            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
+        </div>
+        <div ng-show="confirm.isStatus('complete')">
+            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
+            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
+            <div class="butn white" ui-sref="dashboard">Dashboard</div>
+            <a class="butn white"
+               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
+               target="_blank"
+            >Oracle Documents Cloud</a>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="hero.html">
+    <div class="hero">
+        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+            <div class="banner-overlay">
+                {{hero.heading}}
+            </div>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container-fluid">
@@ -185,15 +194,6 @@
         </div>
 
 
-    </div>
-</script>
-<script type="text/ng-template" id="hero.html">
-    <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
-            <div class="banner-overlay">
-                {{hero.heading}}
-            </div>
-        </div>
     </div>
 </script>
 <script type="text/ng-template" id="scan.html">
@@ -272,20 +272,20 @@
         ></hero-item>
     </div>
 </script>
-<script type="text/ng-template" id="confirm-screen.html">
-    <div screen="confirm">
-
-        <confirm-item></confirm-item>
-
-
-    </div>
-</script>
 <script type="text/ng-template" id="dashboard-screen.html">
     <div screen="dashboard">
 
         <form-list-item>
 
         </form-list-item>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="confirm-screen.html">
+    <div screen="confirm">
+
+        <confirm-item></confirm-item>
 
 
     </div>
