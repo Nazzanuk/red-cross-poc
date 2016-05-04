@@ -54,6 +54,22 @@
 
 
 
+<script type="text/ng-template" id="confirm.html">
+    <div class="confirm">
+        <div ng-show="confirm.isStatus('sending')">
+            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
+        </div>
+        <div ng-show="confirm.isStatus('complete')">
+            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
+            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
+            <div class="butn white" ui-sref="dashboard">Dashboard</div>
+            <a class="butn white"
+               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
+               target="_blank"
+            >Oracle Documents Cloud</a>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="content.html">
     <div class="content" id="print_me">
         <div class="container-fluid">
@@ -127,20 +143,20 @@
                         <table-header label="Donor Details"></table-header>
                         <table-row>
                             <div class="flex-label" style="justify-content: center">Name</div>
-                            <div class="flex-label" style="justify-content: center;min-width: 230px;">Email</div>
-                            <div class="flex-label" style="justify-content: center;max-width: 70px;">Age</div>
-                            <div class="flex-label" style="justify-content: center;max-width: 70px;">Gender</div>
-                            <div class="flex-label" style="justify-content: center">Nationality</div>
-                            <div class="flex-label" style="justify-content: center">Submitted</div>
+                            <div class="flex-label hidden-xs hidden-sm" style="justify-content: center;min-width: 230px;">Email</div>
+                            <div class="flex-label hidden-xs" style="justify-content: center;max-width: 70px;">Age</div>
+                            <div class="flex-label hidden-xs" style="justify-content: center;max-width: 70px;">Gender</div>
+                            <div class="flex-label hidden-xs hidden-sm" style="justify-content: center">Nationality</div>
+                            <div class="flex-label hidden-xs hidden-sm" style="justify-content: center">Submitted</div>
                             <div class="flex-label" style="justify-content: center">Form Link</div>
                         </table-row>
                         <table-row ng-repeat="form in formList.getForms() | filter:formList.search | orderBy:formList.predicate">
                             <div class="flex-content" style="justify-content: center">{{form.firstName}} {{form.lastName}}</div>
-                            <div class="flex-content" style="justify-content: center;min-width: 230px;">{{form.email}}</div>
-                            <div class="flex-content" style="justify-content: center;max-width: 70px;">{{form.age}}</div>
-                            <div class="flex-content" style="justify-content: center;max-width: 70px;">{{form.gender}}</div>
-                            <div class="flex-content" style="justify-content: center">{{form.nationality}}</div>
-                            <div class="flex-content" style="justify-content: center">{{form.time}}</div>
+                            <div class="flex-content hidden-xs hidden-sm" style="justify-content: center;min-width: 230px;">{{form.email}}</div>
+                            <div class="flex-content hidden-xs" style="justify-content: center;max-width: 70px;">{{form.age}}</div>
+                            <div class="flex-content hidden-xs" style="justify-content: center;max-width: 70px;">{{form.gender}}</div>
+                            <div class="flex-content hidden-xs hidden-sm" style="justify-content: center">{{form.nationality}}</div>
+                            <div class="flex-content hidden-xs hidden-sm" style="justify-content: center">{{form.time}}</div>
                             <div class="flex-content" style="justify-content: center">
                                 <a class="butn" href="{{form.formUrl}}" target="_blank" style="min-width:auto;padding: 0 15px;">Open Form &nbsp;
                                     <i class="fa fa-angle-right"></i></a>
@@ -152,31 +168,6 @@
             </content-item>
         </div>
 
-    </div>
-</script>
-<script type="text/ng-template" id="confirm.html">
-    <div class="confirm">
-        <div ng-show="confirm.isStatus('sending')">
-            <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
-        </div>
-        <div ng-show="confirm.isStatus('complete')">
-            <div class="confirm-header"><span>Thank You &nbsp; <i class="fa fa-check"></i></span></div>
-            <a class="butn white" ng-href="{{confirm.getFormUrl()}}" target="_blank">View Form</a>
-            <div class="butn white" ui-sref="dashboard">Dashboard</div>
-            <a class="butn white"
-               ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
-               target="_blank"
-            >Oracle Documents Cloud</a>
-        </div>
-    </div>
-</script>
-<script type="text/ng-template" id="hero.html">
-    <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
-            <div class="banner-overlay">
-                {{hero.heading}}
-            </div>
-        </div>
     </div>
 </script>
 <script type="text/ng-template" id="header.html">
@@ -194,6 +185,15 @@
         </div>
 
 
+    </div>
+</script>
+<script type="text/ng-template" id="hero.html">
+    <div class="hero">
+        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+            <div class="banner-overlay">
+                {{hero.heading}}
+            </div>
+        </div>
     </div>
 </script>
 <script type="text/ng-template" id="scan.html">
@@ -272,20 +272,20 @@
         ></hero-item>
     </div>
 </script>
+<script type="text/ng-template" id="confirm-screen.html">
+    <div screen="confirm">
+
+        <confirm-item></confirm-item>
+
+
+    </div>
+</script>
 <script type="text/ng-template" id="dashboard-screen.html">
     <div screen="dashboard">
 
         <form-list-item>
 
         </form-list-item>
-
-
-    </div>
-</script>
-<script type="text/ng-template" id="confirm-screen.html">
-    <div screen="confirm">
-
-        <confirm-item></confirm-item>
 
 
     </div>
