@@ -283,6 +283,23 @@ content-item .content {
       font-weight: 600;
       color: #ED1B2E; }
 
+form-list-item .form-list select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+form-list-item .form-list .flex-label, form-list-item .form-list .flex-content {
+  -webkit-flex: 1 !important;
+      -ms-flex: 1 !important;
+          flex: 1 !important; }
+
 header-item .header {
   position: absolute;
   top: 0;
@@ -345,22 +362,44 @@ hero-item .hero .hero-banner {
     font-size: 50px;
     font-weight: 100; }
 
-form-list-item .form-list select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: none;
-  outline: none;
-  box-shadow: none;
+scan-item .scan {
+  height: calc(100vh - 50px);
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
-          justify-content: center; }
-
-form-list-item .form-list .flex-label, form-list-item .form-list .flex-content {
-  -webkit-flex: 1 !important;
-      -ms-flex: 1 !important;
-          flex: 1 !important; }
+          justify-content: center;
+  position: relative;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: radial-gradient(ellipse at center, white 40%, #e6e6e6 90%);
+  text-align: center; }
+  scan-item .scan div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+  scan-item .scan .scan-header {
+    font-weight: 100;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px; }
+  scan-item .scan .scan-img {
+    max-width: calc(100% - 60px);
+    width: 500px;
+    margin-top: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); }
 
 splash-item .splash {
   margin-top: -50px;
@@ -430,45 +469,6 @@ splash-item .splash {
     -webkit-justify-content: center;
         -ms-flex-pack: center;
             justify-content: center; }
-
-scan-item .scan {
-  height: calc(100vh - 50px);
-  width: 100%;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-align-content: center;
-      -ms-flex-line-pack: center;
-          align-content: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: relative;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background: radial-gradient(ellipse at center, white 40%, #e6e6e6 90%);
-  text-align: center; }
-  scan-item .scan div {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column; }
-  scan-item .scan .scan-header {
-    font-weight: 100;
-    font-size: 50px;
-    text-align: center;
-    margin-bottom: 30px; }
-  scan-item .scan .scan-img {
-    max-width: calc(100% - 60px);
-    width: 500px;
-    margin-top: 30px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); }
 
 table-item table-row, table-item table-contents, table-item table-header {
   -webkit-flex: 1 0 100%;

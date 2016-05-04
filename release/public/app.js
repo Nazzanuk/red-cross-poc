@@ -210,7 +210,7 @@ app.service('Form', function ($state, $stateParams, $timeout, $http, DB) {
 app.service('Menu', function ($state, $stateParams, $timeout) {
 
     var currentPage,
-        pages = [{ name: "Home", slug: "home" }
+        pages = [{ name: "Home", slug: "home" }, { name: "Dashboard", slug: "dashboard" }
     //{name: "About", slug: "about"}
     ];
 
@@ -438,43 +438,6 @@ app.component('contentItem', {
     }
 });
 
-app.component('headerItem', {
-    templateUrl: 'header.html',
-    controllerAs: 'header',
-    bindings: {
-        img: '@'
-    },
-    controller: function controller(Menu) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {
-            getPages: Menu.getPages,
-            setPage: Menu.setPage,
-            isCurrentPage: Menu.isCurrentPage
-        });
-    }
-});
-
-app.component('heroItem', {
-    templateUrl: 'hero.html',
-    controllerAs: 'hero',
-    bindings: {
-        img: '@',
-        heading: '@'
-    },
-    controller: function controller($element, $timeout) {
-
-        var init = function init() {};
-
-        init();
-
-        _.extend(this, {});
-    }
-});
-
 app.component('formListItem', {
     templateUrl: 'form-list.html',
     controllerAs: 'formList',
@@ -504,9 +467,29 @@ app.component('formListItem', {
     }
 });
 
-app.component('splashItem', {
-    templateUrl: 'splash.html',
-    controllerAs: 'splash',
+app.component('headerItem', {
+    templateUrl: 'header.html',
+    controllerAs: 'header',
+    bindings: {
+        img: '@'
+    },
+    controller: function controller(Menu) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            getPages: Menu.getPages,
+            setPage: Menu.setPage,
+            isCurrentPage: Menu.isCurrentPage
+        });
+    }
+});
+
+app.component('heroItem', {
+    templateUrl: 'hero.html',
+    controllerAs: 'hero',
     bindings: {
         img: '@',
         heading: '@'
@@ -601,6 +584,23 @@ app.component('scanItem', {
                 return status == string;
             }
         });
+    }
+});
+
+app.component('splashItem', {
+    templateUrl: 'splash.html',
+    controllerAs: 'splash',
+    bindings: {
+        img: '@',
+        heading: '@'
+    },
+    controller: function controller($element, $timeout) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {});
     }
 });
 

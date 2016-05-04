@@ -77,32 +77,6 @@
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="header.html">
-    <div class="header">
-        <div class="container-fluid">
-            <strong><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
-
-            <div class="header-menu">
-                <div class="menu-item"
-                     ng-repeat="page in header.getPages()"
-                     ng-click="header.setPage(page.slug)"
-                     ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}</div>
-            </div>
-        </div>
-
-
-    </div>
-</script>
-<script type="text/ng-template" id="hero.html">
-    <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
-            <div class="banner-overlay">
-                {{hero.heading}}
-            </div>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="form-list.html">
     <div class="form-list">
 
@@ -196,22 +170,30 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="splash.html">
-    <div class="splash">
-        <div class="splash-overlay">
-            <div class="splash-header">Red Cross Forms</div>
+<script type="text/ng-template" id="header.html">
+    <div class="header">
+        <div class="container-fluid">
+            <strong ui-sref="home"><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
 
-            <div class="splash-buttons">
-                <div class="butn white" ui-sref="scan">Scan ID</div>
-                <div class="butn white" ui-sref="form({formData:'{}'})">Fill Manually</div>
-            </div>
-
-            <div class="splash-box">
-
-
+            <div class="header-menu">
+                <div class="menu-item"
+                     ng-repeat="page in header.getPages()"
+                     ng-click="header.setPage(page.slug)"
+                     ng-class="{active:header.isCurrentPage(page.slug)}"
+                >{{page.name}}</div>
             </div>
         </div>
 
+
+    </div>
+</script>
+<script type="text/ng-template" id="hero.html">
+    <div class="hero">
+        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+            <div class="banner-overlay">
+                {{hero.heading}}
+            </div>
+        </div>
     </div>
 </script>
 <script type="text/ng-template" id="scan.html">
@@ -234,6 +216,24 @@
         </div>
 
         <img id="blah" ng-if="scan.getImage()" src="{{scan.getImage()}}" class="scan-img"/>
+    </div>
+</script>
+<script type="text/ng-template" id="splash.html">
+    <div class="splash">
+        <div class="splash-overlay">
+            <div class="splash-header">Red Cross Forms</div>
+
+            <div class="splash-buttons">
+                <div class="butn white" ui-sref="scan">Scan ID</div>
+                <div class="butn white" ui-sref="form({formData:'{}'})">Fill Manually</div>
+            </div>
+
+            <div class="splash-box">
+
+
+            </div>
+        </div>
+
     </div>
 </script>
 <script type="text/ng-template" id="table.html">
