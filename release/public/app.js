@@ -150,16 +150,16 @@ app.service('Form', function ($state, $stateParams, $timeout, $http, DB) {
             clone.formUrl = formUrl;
             DB.insert('forms', clone);
 
-            var options = {
-                body: 'A form has been completed by ' + formData.firstName + ' ' + formData.lastName,
-                icon: "http://www.crwflags.com/fotw/images/i/icrc-c.gif"
-            };
-            var n = new Notification('American Red Cross', options);
-
-            n.onclick = function (event) {
-                event.preventDefault(); // prevent the browser from focusing the Notification's tab
-                window.open('/#/dashboard', '_blank');
-            };
+            //var options = {
+            //    body: `A form has been completed by ${formData.firstName} ${formData.lastName}`,
+            //    icon: "http://www.crwflags.com/fotw/images/i/icrc-c.gif"
+            //};
+            //var n = new Notification('American Red Cross', options);
+            //
+            //n.onclick = function (event) {
+            //    event.preventDefault(); // prevent the browser from focusing the Notification's tab
+            //    window.open('/#/dashboard', '_blank');
+            //}
         });
     };
 
@@ -413,6 +413,36 @@ app.component('confirmItem', {
     }
 });
 
+app.component('formListItem', {
+    templateUrl: 'form-list.html',
+    controllerAs: 'formList',
+    bindings: {},
+    controller: function controller($element, $timeout, $scope, DB) {
+
+        var forms = [];
+
+        var loadForms = function loadForms() {
+            return DB.load('forms').then(function (data) {
+                console.log('hello');
+                forms = data;
+            });
+        };
+
+        var init = function init() {
+            console.log('form-list init');
+            loadForms();
+        };
+
+        init();
+
+        _.extend(this, {
+            getForms: function getForms() {
+                return forms;
+            }
+        });
+    }
+});
+
 app.component('contentItem', {
     templateUrl: 'content.html',
     controllerAs: 'content',
@@ -446,36 +476,6 @@ app.component('contentItem', {
             //genPdfUrl
             //getFormData: () => formData,
             //updateParams
-        });
-    }
-});
-
-app.component('formListItem', {
-    templateUrl: 'form-list.html',
-    controllerAs: 'formList',
-    bindings: {},
-    controller: function controller($element, $timeout, $scope, DB) {
-
-        var forms = [];
-
-        var loadForms = function loadForms() {
-            return DB.load('forms').then(function (data) {
-                console.log('hello');
-                forms = data;
-            });
-        };
-
-        var init = function init() {
-            console.log('form-list init');
-            loadForms();
-        };
-
-        init();
-
-        _.extend(this, {
-            getForms: function getForms() {
-                return forms;
-            }
         });
     }
 });
@@ -654,20 +654,20 @@ app.component('tableContents', {
     }
 });
 
-app.controller('AboutScreen', function ($element, $timeout, $scope) {
+app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
-    var init = function init() {
-        //$timeout(() => $element.find('[screen]').addClass('active'), 50);
-    };
+    var init = function init() {};
 
     init();
 
     _.extend($scope, {});
 });
 
-app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('AboutScreen', function ($element, $timeout, $scope) {
 
-    var init = function init() {};
+    var init = function init() {
+        //$timeout(() => $element.find('[screen]').addClass('active'), 50);
+    };
 
     init();
 
@@ -703,9 +703,9 @@ app.controller('FormScreen', function ($element, $timeout, $state, $stateParams,
 app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {
-        Notification.requestPermission(function (result) {
-            console.log('Notification', result);
-        });
+        //Notification.requestPermission(function(result) {
+        //    console.log('Notification', result);
+        //});
     };
 
     init();

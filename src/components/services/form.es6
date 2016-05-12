@@ -30,16 +30,16 @@ app.service('Form', ($state, $stateParams, $timeout, $http, DB) => {
             clone.formUrl = formUrl;
             DB.insert('forms', clone);
 
-            var options = {
-                body: `A form has been completed by ${formData.firstName} ${formData.lastName}`,
-                icon: "http://www.crwflags.com/fotw/images/i/icrc-c.gif"
-            };
-            var n = new Notification('American Red Cross', options);
-
-            n.onclick = function (event) {
-                event.preventDefault(); // prevent the browser from focusing the Notification's tab
-                window.open('/#/dashboard', '_blank');
-            }
+            //var options = {
+            //    body: `A form has been completed by ${formData.firstName} ${formData.lastName}`,
+            //    icon: "http://www.crwflags.com/fotw/images/i/icrc-c.gif"
+            //};
+            //var n = new Notification('American Red Cross', options);
+            //
+            //n.onclick = function (event) {
+            //    event.preventDefault(); // prevent the browser from focusing the Notification's tab
+            //    window.open('/#/dashboard', '_blank');
+            //}
         });
     };
 

@@ -72,13 +72,6 @@
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="content.html">
-    <div class="content" id="print_me">
-        <div class="container-fluid">
-            <div ng-transclude="content"></div>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="form-list.html">
     <div class="form-list">
 
@@ -179,6 +172,13 @@
 
     </div>
 </script>
+<script type="text/ng-template" id="content.html">
+    <div class="content" id="print_me">
+        <div class="container-fluid">
+            <div ng-transclude="content"></div>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container-fluid">
@@ -276,6 +276,14 @@
         <div class="flex-input"><input placeholder="-" ng-model="getFormData()[field.id]"></div>
     </div>
 </script>
+<script type="text/ng-template" id="confirm-screen.html">
+    <div screen="confirm">
+
+        <confirm-item></confirm-item>
+
+
+    </div>
+</script>
 <script type="text/ng-template" id="about-screen.html">
     <div screen="about">
 
@@ -284,14 +292,6 @@
                 img="https://unsplash.it/1200/500/?random&123"
                 heading="About Angular Base"
         ></hero-item>
-    </div>
-</script>
-<script type="text/ng-template" id="confirm-screen.html">
-    <div screen="confirm">
-
-        <confirm-item></confirm-item>
-
-
     </div>
 </script>
 <script type="text/ng-template" id="dashboard-screen.html">
