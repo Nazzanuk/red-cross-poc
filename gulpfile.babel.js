@@ -29,6 +29,12 @@ gulp.task('dev', ['start-server', 'default'], () => {
     ], ['default']);
 });
 
+gulp.task('dev-front-end', ['default'], () => {
+    gulp.watch([
+        'src/**/*'
+    ], ['default']);
+});
+
 gulp.task('start-server', shell.task(['sh start-server.sh']));
 
 gulp.task('copy-public', () =>
@@ -81,7 +87,8 @@ gulp.task('gen-lib-js', () =>
             'src/bower-components/angular/angular.min.js',
             'src/bower-components/moment/min/moment.min.js',
             'src/bower-components/angular-ui-router/release/angular-ui-router.min.js',
-            'src/bower-components/lodash/dist/lodash.min.js'
+            'src/bower-components/lodash/dist/lodash.min.js',
+            'src/bower-components/socket.io-client/socket.io.js'
         ])
         .pipe(concat('lib.js'))
         .pipe(gulp.dest("release/public"))

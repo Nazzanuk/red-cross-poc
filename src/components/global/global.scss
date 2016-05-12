@@ -120,6 +120,10 @@ a {
   cursor: pointer;
   //transition: .2s;
 
+  &.block {
+    display: block;
+  }
+
   &.white {
     background: darken(white, 0%);
     border-bottom: 2px solid darken(white, 10%);

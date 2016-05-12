@@ -13,9 +13,14 @@ app.component('formListItem', {
             });
         };
 
+        var events = () => {
+            $scope.$on('loadForms', loadForms);
+        };
+
         var init = () => {
-            console.log('form-list init')
-            loadForms()
+            console.log('form-list init');
+            loadForms();
+            events();
         };
 
         init();

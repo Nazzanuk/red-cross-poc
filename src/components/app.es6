@@ -1,5 +1,9 @@
 var app = angular.module('app', ['ui.router']);
 
+app.run((Socket) => {
+
+});
+
 app.directive('ngEnter', () => (scope, element, attrs) => {
     element.bind('keypress', (event) => {
         if (event.which !== 13) return;

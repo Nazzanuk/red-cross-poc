@@ -1,0 +1,17 @@
+<script type="text/ng-template" id="alert.html">
+    <div class="alert" ng-click="alert.hide()" ng-class="{active:alert.isVisible()}">
+        <div class="alert-box">
+            <div class="box-icon"><i class="fa fa-check"></i></div>
+            <div class="box-header">
+                Alert
+            </div>
+            <div class="box-content">
+                <p>{{alert.getContent()}}</p>
+
+                <div class="butn block">Done</div>
+            </div>
+        </div>
+
+
+    </div>
+</script>

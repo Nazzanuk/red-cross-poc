@@ -4,6 +4,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var app = angular.module('app', ['ui.router']);
 
+app.run(function (Socket) {});
+
 app.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind('keypress', function (event) {
@@ -52,6 +54,33 @@ var Route = function Route(name, url, resolve, params) {
         resolve: resolve
     });
 };
+
+app.service('Alert', function () {
+    var visible = false,
+        content = "";
+
+    var show = function show(text) {
+        visible = true;
+        content = text;
+    };
+
+    var init = function init() {};
+
+    init();
+
+    return {
+        isVisible: function isVisible() {
+            return visible;
+        },
+        hide: function hide() {
+            return visible = false;
+        },
+        show: show,
+        getContent: function getContent() {
+            return content;
+        }
+    };
+});
 
 app.service('Canvas', function ($state, $stateParams, $timeout) {
 
@@ -260,6 +289,57 @@ app.service('Scan', function ($state, $stateParams, $timeout, $http) {
     return {};
 });
 
+app.service('Socket', function (Alert, $rootScope, $state) {
+    var socket;
+
+    var events = function events() {
+        socket.on('connect', function (data) {
+            console.log('connected to server');
+        });
+
+        socket.on('testing', function (data) {
+            console.log(data);
+        });
+
+        socket.on('alert', function (data) {
+            console.log(data);
+            console.log($state.current.name == 'dashboard');
+            if ($state.current.name == 'dashboard') Alert.show(data.content);
+
+            $rootScope.$broadcast('loadForms');
+            $rootScope.$apply();
+        });
+    };
+
+    var init = function init() {
+        socket = io();
+
+        events();
+    };
+
+    init();
+
+    return {};
+});
+
+app.component('alertItem', {
+    templateUrl: 'alert.html',
+    controllerAs: 'alert',
+    bindings: {},
+    controller: function controller(Alert) {
+
+        var init = function init() {};
+
+        init();
+
+        _.extend(this, {
+            isVisible: Alert.isVisible,
+            hide: Alert.hide,
+            getContent: Alert.getContent
+        });
+    }
+});
+
 app.component('canvasItem', {
     templateUrl: 'canvas.html',
     controllerAs: 'canvas',
@@ -413,36 +493,6 @@ app.component('confirmItem', {
     }
 });
 
-app.component('formListItem', {
-    templateUrl: 'form-list.html',
-    controllerAs: 'formList',
-    bindings: {},
-    controller: function controller($element, $timeout, $scope, DB) {
-
-        var forms = [];
-
-        var loadForms = function loadForms() {
-            return DB.load('forms').then(function (data) {
-                console.log('hello');
-                forms = data;
-            });
-        };
-
-        var init = function init() {
-            console.log('form-list init');
-            loadForms();
-        };
-
-        init();
-
-        _.extend(this, {
-            getForms: function getForms() {
-                return forms;
-            }
-        });
-    }
-});
-
 app.component('contentItem', {
     templateUrl: 'content.html',
     controllerAs: 'content',
@@ -496,6 +546,41 @@ app.component('headerItem', {
             getPages: Menu.getPages,
             setPage: Menu.setPage,
             isCurrentPage: Menu.isCurrentPage
+        });
+    }
+});
+
+app.component('formListItem', {
+    templateUrl: 'form-list.html',
+    controllerAs: 'formList',
+    bindings: {},
+    controller: function controller($element, $timeout, $scope, DB) {
+
+        var forms = [];
+
+        var loadForms = function loadForms() {
+            return DB.load('forms').then(function (data) {
+                console.log('hello');
+                forms = data;
+            });
+        };
+
+        var events = function events() {
+            $scope.$on('loadForms', loadForms);
+        };
+
+        var init = function init() {
+            console.log('form-list init');
+            loadForms();
+            events();
+        };
+
+        init();
+
+        _.extend(this, {
+            getForms: function getForms() {
+                return forms;
+            }
         });
     }
 });
@@ -654,15 +739,6 @@ app.component('tableContents', {
     }
 });
 
-app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
-
-    var init = function init() {};
-
-    init();
-
-    _.extend($scope, {});
-});
-
 app.controller('AboutScreen', function ($element, $timeout, $scope) {
 
     var init = function init() {
@@ -675,6 +751,15 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
 });
 
 app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
+
+    init();
+
+    _.extend($scope, {});
+});
+
+app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {};
 
