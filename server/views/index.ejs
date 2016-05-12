@@ -72,6 +72,13 @@
 
 
 
+<script type="text/ng-template" id="content.html">
+    <div class="content" id="print_me">
+        <div class="container-fluid">
+            <div ng-transclude="content"></div>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="confirm.html">
     <div class="confirm">
         <img src="public/img/mobile-cloud-logo.png" alt=""> Oracle Mobile Cloud Service
@@ -103,7 +110,8 @@
                     <div style="text-align: center;line-height: 50px">
                         <img src="public/img/oracle-cloud-database.png" alt="" style="height: 50px;margin-right: 10px;">
                         <div>
-                            <small>Powered by</small> <strong>Oracle Cloud Database</strong>
+                            <small>Powered by</small>
+                            <strong>Oracle Cloud Database</strong>
                         </div>
                     </div>
 
@@ -188,13 +196,6 @@
             </content-item>
         </div>
 
-    </div>
-</script>
-<script type="text/ng-template" id="content.html">
-    <div class="content" id="print_me">
-        <div class="container-fluid">
-            <div ng-transclude="content"></div>
-        </div>
     </div>
 </script>
 <script type="text/ng-template" id="header.html">
@@ -304,16 +305,6 @@
         ></hero-item>
     </div>
 </script>
-<script type="text/ng-template" id="dashboard-screen.html">
-    <div screen="dashboard">
-
-        <form-list-item>
-
-        </form-list-item>
-
-
-    </div>
-</script>
 <script type="text/ng-template" id="confirm-screen.html">
     <div screen="confirm">
 
@@ -414,6 +405,16 @@
 
             </content>
         </content-item>
+
+    </div>
+</script>
+<script type="text/ng-template" id="dashboard-screen.html">
+    <div screen="dashboard">
+
+        <form-list-item>
+
+        </form-list-item>
+
 
     </div>
 </script>

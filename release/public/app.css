@@ -307,6 +307,27 @@ canvas-item .canvas canvas {
   cursor: crosshair;
   cursor: url("icons/pen-32.png") 0 32, auto; }
 
+content-item .content {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 15px; }
+  @media (max-width: 767px) {
+    content-item .content {
+      padding: 0px; } }
+  content-item .content h1, content-item .content h2, content-item .content h3, content-item .content h4, content-item .content p {
+    margin: 10px 0 0;
+    padding: 10px 0 0; }
+  content-item .content h1 {
+    font-size: 30px;
+    font-weight: 200;
+    padding-bottom: 10px; }
+  content-item .content p {
+    font-size: 16px;
+    font-weight: 300; }
+    content-item .content p a {
+      font-weight: 600;
+      color: #ED1B2E; }
+
 confirm-item .confirm {
   margin-top: -50px;
   height: calc(100vh);
@@ -366,27 +387,6 @@ form-list-item .form-list .flex-label, form-list-item .form-list .flex-content {
   -webkit-flex: 1 !important;
       -ms-flex: 1 !important;
           flex: 1 !important; }
-
-content-item .content {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 15px; }
-  @media (max-width: 767px) {
-    content-item .content {
-      padding: 0px; } }
-  content-item .content h1, content-item .content h2, content-item .content h3, content-item .content h4, content-item .content p {
-    margin: 10px 0 0;
-    padding: 10px 0 0; }
-  content-item .content h1 {
-    font-size: 30px;
-    font-weight: 200;
-    padding-bottom: 10px; }
-  content-item .content p {
-    font-size: 16px;
-    font-weight: 300; }
-    content-item .content p a {
-      font-weight: 600;
-      color: #ED1B2E; }
 
 header-item .header {
   position: absolute;

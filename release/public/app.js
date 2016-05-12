@@ -474,6 +474,43 @@ app.component('canvasItem', {
     }
 });
 
+app.component('contentItem', {
+    templateUrl: 'content.html',
+    controllerAs: 'content',
+    transclude: {
+        content: '?content'
+    },
+    bindings: {},
+    controller: function controller($element, $timeout, $state, $stateParams) {
+        //var formData = {
+        //
+        //};
+        //
+        //var updateParams = (field, data) => {
+        //    console.log('updateParams', field, data)
+        //    formData[field] = data;
+        //    $state.go('home', {formData: JSON.stringify(formData)});
+        //
+        //};
+        //
+        //
+        //var init = () => {
+        //    if ($stateParams.formData) formData = JSON.parse($stateParams.formData);
+        //    console.log('initial formData:', formData);
+        //    //$state.transitionTo('home', {q: 'updated search term'});
+        //
+        //};
+
+        //init();
+
+        _.extend(this, {
+            //genPdfUrl
+            //getFormData: () => formData,
+            //updateParams
+        });
+    }
+});
+
 app.component('confirmItem', {
     templateUrl: 'confirm.html',
     controllerAs: 'confirm',
@@ -524,43 +561,6 @@ app.component('formListItem', {
             getForms: function getForms() {
                 return forms;
             }
-        });
-    }
-});
-
-app.component('contentItem', {
-    templateUrl: 'content.html',
-    controllerAs: 'content',
-    transclude: {
-        content: '?content'
-    },
-    bindings: {},
-    controller: function controller($element, $timeout, $state, $stateParams) {
-        //var formData = {
-        //
-        //};
-        //
-        //var updateParams = (field, data) => {
-        //    console.log('updateParams', field, data)
-        //    formData[field] = data;
-        //    $state.go('home', {formData: JSON.stringify(formData)});
-        //
-        //};
-        //
-        //
-        //var init = () => {
-        //    if ($stateParams.formData) formData = JSON.parse($stateParams.formData);
-        //    console.log('initial formData:', formData);
-        //    //$state.transitionTo('home', {q: 'updated search term'});
-        //
-        //};
-
-        //init();
-
-        _.extend(this, {
-            //genPdfUrl
-            //getFormData: () => formData,
-            //updateParams
         });
     }
 });
@@ -750,15 +750,6 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
     _.extend($scope, {});
 });
 
-app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
-
-    var init = function init() {};
-
-    init();
-
-    _.extend($scope, {});
-});
-
 app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {};
@@ -783,6 +774,15 @@ app.controller('FormScreen', function ($element, $timeout, $state, $stateParams,
         genPdf: Form.genPdf,
         genPdfUrl: Form.genPdfUrl
     });
+});
+
+app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+
+    var init = function init() {};
+
+    init();
+
+    _.extend($scope, {});
 });
 
 app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
