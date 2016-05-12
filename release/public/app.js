@@ -493,6 +493,41 @@ app.component('confirmItem', {
     }
 });
 
+app.component('formListItem', {
+    templateUrl: 'form-list.html',
+    controllerAs: 'formList',
+    bindings: {},
+    controller: function controller($element, $timeout, $scope, DB) {
+
+        var forms = [];
+
+        var loadForms = function loadForms() {
+            return DB.load('forms').then(function (data) {
+                console.log('hello');
+                forms = data;
+            });
+        };
+
+        var events = function events() {
+            $scope.$on('loadForms', loadForms);
+        };
+
+        var init = function init() {
+            console.log('form-list init');
+            loadForms();
+            events();
+        };
+
+        init();
+
+        _.extend(this, {
+            getForms: function getForms() {
+                return forms;
+            }
+        });
+    }
+});
+
 app.component('contentItem', {
     templateUrl: 'content.html',
     controllerAs: 'content',
@@ -546,41 +581,6 @@ app.component('headerItem', {
             getPages: Menu.getPages,
             setPage: Menu.setPage,
             isCurrentPage: Menu.isCurrentPage
-        });
-    }
-});
-
-app.component('formListItem', {
-    templateUrl: 'form-list.html',
-    controllerAs: 'formList',
-    bindings: {},
-    controller: function controller($element, $timeout, $scope, DB) {
-
-        var forms = [];
-
-        var loadForms = function loadForms() {
-            return DB.load('forms').then(function (data) {
-                console.log('hello');
-                forms = data;
-            });
-        };
-
-        var events = function events() {
-            $scope.$on('loadForms', loadForms);
-        };
-
-        var init = function init() {
-            console.log('form-list init');
-            loadForms();
-            events();
-        };
-
-        init();
-
-        _.extend(this, {
-            getForms: function getForms() {
-                return forms;
-            }
         });
     }
 });
@@ -655,7 +655,7 @@ app.component('scanItem', {
                 "age": _.random(18, 55),
                 "nationality": _.sample(['British', 'French', 'American', 'Spanish', 'Mexican', 'German', 'Irish', 'Scottish', 'Portuguese']),
                 "date": moment().format("DD MMM YYYY"),
-                "time": moment().format("YYYYMMDD-hh:mm"),
+                "time": moment().format("YYYYMMDD-HH:mm"),
                 "collectionDate": moment().add(_.random(0, 50), ' days').format("DD MMM YYYY")
             };
 

@@ -350,6 +350,23 @@ confirm-item .confirm {
     margin-top: 30px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); }
 
+form-list-item .form-list select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+form-list-item .form-list .flex-label, form-list-item .form-list .flex-content {
+  -webkit-flex: 1 !important;
+      -ms-flex: 1 !important;
+          flex: 1 !important; }
+
 content-item .content {
   font-size: 14px;
   font-weight: 500;
@@ -414,23 +431,6 @@ header-item .header {
       cursor: pointer; }
       header-item .header .header-menu .menu-item.active {
         background: rgba(0, 0, 0, 0.1); }
-
-form-list-item .form-list select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: none;
-  outline: none;
-  box-shadow: none;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center; }
-
-form-list-item .form-list .flex-label, form-list-item .form-list .flex-content {
-  -webkit-flex: 1 !important;
-      -ms-flex: 1 !important;
-          flex: 1 !important; }
 
 hero-item .hero .hero-banner {
   height: 300px;

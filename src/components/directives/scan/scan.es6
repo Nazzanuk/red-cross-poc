@@ -47,7 +47,7 @@ app.component('scanItem', {
                 "age": _.random(18, 55),
                 "nationality": _.sample(['British', 'French', 'American', 'Spanish', 'Mexican', 'German', 'Irish', 'Scottish', 'Portuguese']),
                 "date": moment().format("DD MMM YYYY"),
-                "time": moment().format("YYYYMMDD-hh:mm"),
+                "time": moment().format("YYYYMMDD-HH:mm"),
                 "collectionDate": moment().add(_.random(0, 50), ' days').format("DD MMM YYYY")
             };
 

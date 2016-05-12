@@ -90,35 +90,6 @@
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="content.html">
-    <div class="content" id="print_me">
-        <div class="container-fluid">
-            <div ng-transclude="content"></div>
-        </div>
-    </div>
-</script>
-<script type="text/ng-template" id="header.html">
-    <div class="header">
-        <div class="container-fluid">
-            <strong class="home" ui-sref="home"><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
-
-            <div class="header-menu">
-                <div class="menu-item"
-                     ng-repeat="page in header.getPages()"
-                     ng-click="header.setPage(page.slug)"
-                     ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}</div>
-            </div>
-
-            <div class="img hidden-xs">
-                <img src="public/img/mobile-cloud-logo.png" alt="">
-                <small>Powered by</small> <strong>Oracle Mobile Cloud</strong>
-            </div>
-        </div>
-
-
-    </div>
-</script>
 <script type="text/ng-template" id="form-list.html">
     <div class="form-list">
 
@@ -216,6 +187,35 @@
                 </content>
             </content-item>
         </div>
+
+    </div>
+</script>
+<script type="text/ng-template" id="content.html">
+    <div class="content" id="print_me">
+        <div class="container-fluid">
+            <div ng-transclude="content"></div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="header.html">
+    <div class="header">
+        <div class="container-fluid">
+            <strong class="home" ui-sref="home"><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
+
+            <div class="header-menu">
+                <div class="menu-item"
+                     ng-repeat="page in header.getPages()"
+                     ng-click="header.setPage(page.slug)"
+                     ng-class="{active:header.isCurrentPage(page.slug)}"
+                >{{page.name}}</div>
+            </div>
+
+            <div class="img hidden-xs">
+                <img src="public/img/mobile-cloud-logo.png" alt="">
+                <small>Powered by</small> <strong>Oracle Mobile Cloud</strong>
+            </div>
+        </div>
+
 
     </div>
 </script>
