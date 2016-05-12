@@ -13,8 +13,9 @@ module.exports = {
         Nedb.find(req.params.collection)
             .then((docs) => converter.json2csv(docs, (err, csv) => {
                 console.log('generated csv', csv);
-                res.setHeader('Content-disposition', `filename=red-cross-forms.csv`);
-                res.contentType('csv');
+                res.setHeader('Content-disposition', `attachment; filename=red-cross-forms.csv`);
+                res.contentType("application/csv; charset=UTF-8");
+                //res.contentType('text/csv');
                 res.send(csv)
             }));
     },
