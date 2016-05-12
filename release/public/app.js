@@ -94,10 +94,11 @@ app.service('DB', function ($state, $stateParams, $timeout, $http) {
     };
 
     var load = function load(collection) {
+        console.log('hello!');
         return $http.get(API + '/' + collection).then(function (response) {
-            console.log('response', response);
+            console.log('load response', response);
             return response.data;
-        });
+        }, console.log);
     };
 
     var init = function init() {};
@@ -148,6 +149,17 @@ app.service('Form', function ($state, $stateParams, $timeout, $http, DB) {
             var clone = _.clone(formData);
             clone.formUrl = formUrl;
             DB.insert('forms', clone);
+
+            var options = {
+                body: 'A form has been completed by ' + formData.firstName + ' ' + formData.lastName,
+                icon: "http://www.crwflags.com/fotw/images/i/icrc-c.gif"
+            };
+            var n = new Notification('American Red Cross', options);
+
+            n.onclick = function (event) {
+                event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                window.open('/#/dashboard', '_blank');
+            };
         });
     };
 
@@ -448,6 +460,7 @@ app.component('formListItem', {
 
         var loadForms = function loadForms() {
             return DB.load('forms').then(function (data) {
+                console.log('hello');
                 forms = data;
             });
         };
@@ -652,16 +665,21 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
     _.extend($scope, {});
 });
 
-app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
-    var init = function init() {};
+    var init = function init() {
+
+        Notification.requestPermission().then(function (result) {
+            console.log('Notification', result);
+        });
+    };
 
     init();
 
     _.extend($scope, {});
 });
 
-app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {};
 

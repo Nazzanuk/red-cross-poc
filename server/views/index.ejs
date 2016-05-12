@@ -56,6 +56,8 @@
 
 <script type="text/ng-template" id="confirm.html">
     <div class="confirm">
+        <img src="public/img/mobile-cloud-logo.png" alt=""> Oracle Mobile Cloud Service
+        <div style="height: 50px;"></div>
         <div ng-show="confirm.isStatus('sending')">
             <div class="confirm-header">Generating Form &nbsp; <i class="fa fa-spin fa-cog"></i></div>
         </div>
@@ -83,9 +85,16 @@
         <div class="container">
             <content-item>
                 <content>
-                    <div class="butn pull-right">Export to XLS</div>
-                    <div class="butn pull-right" style="margin-right: 10px">Export to PDF</div>
-                    <h1>Forms</h1>
+                    <a href="/csv/forms" class="butn pull-right">Export to CSV</a>
+                    <!--<div class="butn pull-right" style="margin-right: 10px">Export to PDF</div>-->
+                    <h1>Forms Dashboard</h1>
+
+                    <div style="text-align: center;line-height: 50px">
+                        <img src="public/img/oracle-cloud-database.png" alt="" style="height: 50px;margin-right: 10px;">
+                        <div>
+                            <small>Powered by</small> <strong>Oracle Cloud Database</strong>
+                        </div>
+                    </div>
 
                     <table-item>
                         <table-row>
@@ -173,7 +182,7 @@
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container-fluid">
-            <strong ui-sref="home"><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
+            <strong class="home" ui-sref="home"><i class="fa fa-times"></i> &nbsp;Red Cross</strong>
 
             <div class="header-menu">
                 <div class="menu-item"
@@ -181,6 +190,11 @@
                      ng-click="header.setPage(page.slug)"
                      ng-class="{active:header.isCurrentPage(page.slug)}"
                 >{{page.name}}</div>
+            </div>
+
+            <div class="img hidden-xs">
+                <img src="public/img/mobile-cloud-logo.png" alt="">
+                <small>Powered by</small> <strong>Oracle Mobile Cloud</strong>
             </div>
         </div>
 
@@ -272,20 +286,20 @@
         ></hero-item>
     </div>
 </script>
-<script type="text/ng-template" id="confirm-screen.html">
-    <div screen="confirm">
-
-        <confirm-item></confirm-item>
-
-
-    </div>
-</script>
 <script type="text/ng-template" id="dashboard-screen.html">
     <div screen="dashboard">
 
         <form-list-item>
 
         </form-list-item>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="confirm-screen.html">
+    <div screen="confirm">
+
+        <confirm-item></confirm-item>
 
 
     </div>

@@ -6,6 +6,7 @@ header-item {
     right: 0;
     height: 50px;
     line-height: 50px;
+    text-align: center;
 
     background: darken($primary, 10%);
     //background: linear-gradient(darken($primary, 10%) 0%,darken($primary, 10%) 100%);
@@ -22,11 +23,28 @@ header-item {
       //color: $primary;
     }
 
-    strong {
+    .home {
       font-weight: 900;
+      float: left;
+      position: absolute;
+      left: 15px;
+    }
+
+    .img {
+      line-height: 40px;
+      height: 40px;
+      margin: 5px;
+      display: inline-block;
+
+      img {
+        height: 40px;
+        margin-right: 10px;
+      }
     }
 
     .header-menu {
+      position: absolute;
+      right: 15px;
       float: right;
 
       .menu-item {

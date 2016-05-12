@@ -1,14 +1,27 @@
 'use strict';
 
+var converter = require('json-2-csv');
 var phantom = require('phantom');
 var fs = require("fs");
 var OCD = require("../services/ocd");
 var Nedb = require('./../services/nedb');
 
+
 module.exports = {
+    getCSV(req, res) {
+
+        Nedb.find(req.params.collection)
+            .then((docs) => converter.json2csv(docs, (err, csv) => {
+                console.log('generated csv', csv);
+                res.setHeader('Content-disposition', `filename=red-cross-forms.csv`);
+                res.contentType('csv');
+                res.send(csv)
+            }));
+    },
+
     dbCollection(req, res) {
-        console.log('getCollection', req.params);
-        Nedb.find(res, req.params.collection);
+        Nedb.find(req.params.collection)
+            .then((docs) => res.json(docs));
     },
 
     print(req, res) {
@@ -42,7 +55,7 @@ module.exports = {
                         console.log('Rendered Page - ' + `../release/public/pdf/form-${now}.pdf`);
                         //res.download('../release/public/pdf/pdf.pdf'); // Set disposition and send it.
                         //res.redirect(`/public/pdf/form-${now}.pdf`);
-                        res.send({formUrl:`/public/pdf/form-${now}.pdf`});
+                        res.send({formUrl: `/public/pdf/form-${now}.pdf`});
                         OCD.upload(`../release/public/pdf/form-${now}.pdf`, `form-${now}.pdf`);
                         phInstance.exit();
                     });

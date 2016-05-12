@@ -8,6 +8,7 @@ app.component('formListItem', {
 
         var loadForms = () => {
             return DB.load('forms').then((data) => {
+                console.log('hello')
                 forms = data;
             });
         };

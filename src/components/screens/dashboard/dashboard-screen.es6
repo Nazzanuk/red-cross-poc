@@ -2,6 +2,9 @@ app.controller('DashboardScreen', ($element, $timeout, $state, $stateParams, $sc
 
     var init = () => {
 
+        Notification.requestPermission().then(function(result) {
+            console.log('Notification', result);
+        });
     };
 
     init();

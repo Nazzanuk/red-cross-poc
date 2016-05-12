@@ -61,7 +61,7 @@ gulp.task('gen-css', () =>
             'src/components/global/global.scss',
             "src/components/**/*.scss"
         ])
-        .pipe(concat('app.scss'))
+        .pipe(concat('app.css'))
         .pipe(sass({errLogToConsole: true}))
         .on('error', function (e) {
             console.log('>>> ERROR', e);

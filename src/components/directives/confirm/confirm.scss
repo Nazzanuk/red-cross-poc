@@ -15,7 +15,7 @@ confirm-item {
     background: radial-gradient(ellipse at center,  darken(white, 0%) 40%,darken(white, 10%) 90%);
     text-align: center;
     background: radial-gradient(ellipse at center,  darken($primary, 15%) 10%,darken($primary, 30%) 90%);
-
+    color: white;
 
     div {
       display: flex;

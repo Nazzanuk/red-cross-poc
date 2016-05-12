@@ -11,11 +11,11 @@ app.service('DB', ($state, $stateParams, $timeout, $http) => {
     };
 
     var load = (collection) => {
+        console.log('hello!');
         return $http.get(`${API}/${collection}`).then((response) => {
-            console.log('response', response);
+            console.log('load response', response);
             return response.data
-
-        });
+        }, console.log);
     };
 
     var init = () => {

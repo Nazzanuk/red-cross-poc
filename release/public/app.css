@@ -242,7 +242,8 @@ confirm-item .confirm {
           flex-direction: column;
   background: radial-gradient(ellipse at center, white 40%, #e6e6e6 90%);
   text-align: center;
-  background: radial-gradient(ellipse at center, #ae0e1c 10%, #670811 90%); }
+  background: radial-gradient(ellipse at center, #ae0e1c 10%, #670811 90%);
+  color: white; }
   confirm-item .confirm div {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -307,6 +308,7 @@ header-item .header {
   right: 0;
   height: 50px;
   line-height: 50px;
+  text-align: center;
   background: #c51020;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   color: white; }
@@ -316,9 +318,22 @@ header-item .header {
   header-item .header .fa-times {
     -webkit-transform: rotate(45deg);
             transform: rotate(45deg); }
-  header-item .header strong {
-    font-weight: 900; }
+  header-item .header .home {
+    font-weight: 900;
+    float: left;
+    position: absolute;
+    left: 15px; }
+  header-item .header .img {
+    line-height: 40px;
+    height: 40px;
+    margin: 5px;
+    display: inline-block; }
+    header-item .header .img img {
+      height: 40px;
+      margin-right: 10px; }
   header-item .header .header-menu {
+    position: absolute;
+    right: 15px;
     float: right; }
     header-item .header .header-menu .menu-item {
       float: left;
