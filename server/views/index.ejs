@@ -72,13 +72,6 @@
 
 
 
-<script type="text/ng-template" id="content.html">
-    <div class="content" id="print_me">
-        <div class="container-fluid">
-            <div ng-transclude="content"></div>
-        </div>
-    </div>
-</script>
 <script type="text/ng-template" id="confirm.html">
     <div class="confirm">
         <img src="public/img/mobile-cloud-logo.png" alt=""> Oracle Mobile Cloud Service
@@ -94,6 +87,13 @@
                ng-href="https://vassit2015-gbvassitservi00618.documents.us2.oraclecloud.com/documents/folder/FAF85E93D11BB6AEFDCBCF6FF9BD3A2A989DD2119B94/_PoC_Red_Cross/nameasc"
                target="_blank"
             >Oracle Documents Cloud</a>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="content.html">
+    <div class="content" id="print_me">
+        <div class="container-fluid">
+            <div ng-transclude="content"></div>
         </div>
     </div>
 </script>
@@ -313,6 +313,16 @@
 
     </div>
 </script>
+<script type="text/ng-template" id="dashboard-screen.html">
+    <div screen="dashboard">
+
+        <form-list-item>
+
+        </form-list-item>
+
+
+    </div>
+</script>
 <script type="text/ng-template" id="form-screen.html">
     <div screen="form">
 
@@ -347,7 +357,7 @@
                     <table-header label="Donor Details"></table-header>
                     <table-row>
                         <table-field label="Email" id="email"></table-field>
-                        <table-field label="Nationality" name="nationality"></table-field>
+                        <table-field label="Nationality" id="nationality"></table-field>
                     </table-row>
 
                     <table-row>
@@ -405,16 +415,6 @@
 
             </content>
         </content-item>
-
-    </div>
-</script>
-<script type="text/ng-template" id="dashboard-screen.html">
-    <div screen="dashboard">
-
-        <form-list-item>
-
-        </form-list-item>
-
 
     </div>
 </script>
