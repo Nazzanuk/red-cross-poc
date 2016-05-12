@@ -665,21 +665,16 @@ app.controller('AboutScreen', function ($element, $timeout, $scope) {
     _.extend($scope, {});
 });
 
-app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
-    var init = function init() {
-
-        Notification.requestPermission().then(function (result) {
-            console.log('Notification', result);
-        });
-    };
+    var init = function init() {};
 
     init();
 
     _.extend($scope, {});
 });
 
-app.controller('ConfirmScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
+app.controller('DashboardScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
     var init = function init() {};
 
@@ -707,7 +702,11 @@ app.controller('FormScreen', function ($element, $timeout, $state, $stateParams,
 
 app.controller('HomeScreen', function ($element, $timeout, $state, $stateParams, $scope, Form) {
 
-    var init = function init() {};
+    var init = function init() {
+        Notification.requestPermission(function (result) {
+            console.log('Notification', result);
+        });
+    };
 
     init();
 
